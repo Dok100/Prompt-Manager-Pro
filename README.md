@@ -21,12 +21,13 @@ cd ~/Desktop/LLM-Prompt-Manager-Pro
 open index.html
 ```
 
-## ✨ Neue Verbesserungen in Version 3.0
+## ✨ Neue Verbesserungen in Version 4.0
 
 ### 🎨 Dezenteres Design
 - **Action-Buttons**: Werden nur bei Hover angezeigt (weniger aufdringlich)
 - **Subtile Farben**: Reduzierte Farbintensität für angenehmere Optik
 - **Besserer Kontrast**: Optimierte Lesbarkeit ohne Überladung
+- **Apple-Look**: Modernes Farbset und sanfte Schatten für ein macOS-Feeling
 
 ### 📁 Verbesserte Kategorieverwaltung
 - **Scrollbare Liste**: Alle Kategorien sichtbar mit Scrollleiste
@@ -190,5 +191,5 @@ Die App ist modular aufgebaut und kann erweitert werden:
 
 ---
 
-**Version 3.0** - Dezente Optik & Funktionale Kategorien
+**Version 4.0** - Apple‑inspiriertes Design & Funktionale Kategorien
 Optimiert für macOS Safari mit verbesserter Benutzerfreundlichkeit.
