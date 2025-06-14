@@ -1,0 +1,595 @@
+{
+  "prompts": [
+    {
+      "id": 1,
+      "title": "Code Review Assistant",
+      "shortDescription": "Systematische Code-Reviews mit strukturierter Ausgabe",
+      "fullDescription": "Dieser Prompt führt systematische Code-Reviews durch mit Fokus auf Best Practices, Sicherheit und Performance.",
+      "content": "Führe eine systematische Code-Review durch für den folgenden {{programmiersprache}}-Code:\n\n{{code}}\n\nAnalysiere:\n1. Code-Qualität und Best Practices\n2. Sicherheitsaspekte\n3. Performance-Optimierungen\n4. Lesbarkeit und Wartbarkeit\n\nGib strukturierte Verbesserungsvorschläge.",
+      "category": "coding",
+      "tags": [
+        "code-review",
+        "quality",
+        "best-practices"
+      ],
+      "created": "2025-06-07T10:29:33.541Z",
+      "updated": "2025-06-07T10:29:33.541Z"
+    },
+    {
+      "id": 2,
+      "title": "Blog Content Creator",
+      "shortDescription": "Erstellt SEO-optimierte Blog-Artikel zu jedem Thema",
+      "fullDescription": "Generiert vollständige Blog-Artikel mit SEO-Optimierung und strukturiertem Aufbau.",
+      "content": "Erstelle einen SEO-optimierten Blog-Artikel zum Thema '{{thema}}' mit folgenden Spezifikationen:\n\n- Zielgruppe: {{zielgruppe}}\n- Tonalität: {{tonalitaet}}\n- Länge: {{laenge}} Wörter\n\nStruktur:\n1. Catchy Headline\n2. Einleitung mit Hook\n3. Hauptteil mit Unterüberschriften\n4. Fazit mit Call-to-Action",
+      "category": "creative",
+      "tags": [
+        "blog",
+        "seo",
+        "content-marketing"
+      ],
+      "created": "2025-06-07T10:29:33.541Z",
+      "updated": "2025-06-07T10:39:11.712Z"
+    },
+    {
+      "id": 3,
+      "title": "Data Analysis Expert",
+      "shortDescription": "Analysiert Datensätze und erstellt Insights",
+      "fullDescription": "Führt umfassende Datenanalysen durch und erstellt actionable Insights.",
+      "content": "Analysiere den folgenden Datensatz:\n\n{{datensatz}}\n\nFührung eine umfassende Analyse durch:\n1. Deskriptive Statistiken\n2. Trends und Muster\n3. Korrelationen\n4. Anomalien\n5. Handlungsempfehlungen",
+      "category": "analysis",
+      "tags": [
+        "data",
+        "statistics",
+        "insights"
+      ],
+      "created": "2025-06-07T10:29:33.541Z",
+      "updated": "2025-06-07T10:29:33.541Z"
+    },
+    {
+      "id": 4,
+      "title": "Professional Email Response",
+      "shortDescription": "Erstellt höfliche und professionelle E-Mail-Antworten",
+      "fullDescription": "Generiert professionelle E-Mail-Antworten für verschiedene Business-Kontexte.",
+      "content": "Erstelle eine höfliche und professionelle E-Mail-Antwort für folgende Anfrage:\n\n{{kundenanfrage}}\n\nKontext: {{kontext}}\nGewünschter Tonfall: {{tonfall}}\n\nDie Antwort soll:\n- Höflich und professionell sein\n- Das Problem/die Anfrage direkt adressieren\n- Lösungsvorschläge enthalten\n- Einen positiven Abschluss haben",
+      "category": "creative",
+      "tags": [
+        "email",
+        "communication",
+        "professional"
+      ],
+      "created": "2025-06-07T10:29:33.541Z",
+      "updated": "2025-06-07T10:38:21.127Z"
+    },
+    {
+      "title": "Promptumwandler",
+      "category": "cat_1749292670997",
+      "shortDescription": "Umwandeln von Prompts in eine einheitliche Struktur",
+      "fullDescription": "Dieser Prompt wandelt Prompts aus OneNote in das Schema der LLM Prompt Manager App um.",
+      "content": "Du bekommst gleich einen bestehenden Prompttext. Deine Aufgabe ist es, daraus einen neuen Prompt zu generieren, der dem folgenden Schema entspricht:\n\n- **Titel**\n- **Kategorie**\n- **Tags**\n- **Beschreibung**\n- **Prompttext**\n\n1. Erkenne im Text enthaltene Platzhaltervariablen wie z. B. [Thema] oder <Zielgruppe> und konvertiere sie in das Format {{variable}}.\n\n2. Leite aus dem Inhalt einen passenden Titel, verwende ein Kategorie aus folgender Liste\n\n\t- Prompt-Werkzeuge\n\t- Eigene GPT_Bots\n\t- Geschäftlich\n\t- Alltag\n\t- Recherche\n\t- Schreiben /Text\n\t- Programmieren\n\t- Bilder\n\t- Lehre\n\t- Workflows\n\nund sinnvolle Tags ab.\n\n3. Formuliere eine Beschreibung für den Prompt mit max. 500 Zeichen in folgendem Stil\n\n<u>**Zweck:**</u> Was macht der Prompt?  \n<u>**Anwendung:**</u> Wann verwendest du ihn?  \n<u>**Input:**</u> Was gibst du ein?  \n<u>**Output:**</u> Was bekommst du?  \n<u>**Tipps:**</u> Besondere Hinweise\n\n\n\n  \n4. Formuliere eine Kurzbeschreibung mit max. 200 Zeichen\n\n5. Strukturiere den eigentlichen Prompttext  klar und funktional, sodass er direkt einsatzbereit ist.\n\nHier ist der alte Prompttext: {{variablen}}\n\n\nGib das Ergebnis bitte im oben beschriebenen Format zurück.\n",
+      "tags": [
+        "Struktur",
+        "Promptumwandler"
+      ],
+      "id": 1749293790372,
+      "created": "2025-06-07T10:56:30.372Z",
+      "updated": "2025-06-11T17:35:23.233Z"
+    },
+    {
+      "title": "Mehrperspektivische Entscheidungsanalyse mit Expertenbewertung",
+      "category": "cat_1749292490657",
+      "shortDescription": "Analysiere deine Entscheidung aus vier Persona-Perspektiven und erhalte eine Expertenbewertung mit klarer Abwägung von Gewinn und Verlust.",
+      "fullDescription": "Zweck: Dieser Prompt analysiert deine Entscheidung aus vier verschiedenen Perspektiven (Personas) und bewertet sie abschließend mit einer Expertenmeinung.\nAnwendung: Nutze ihn, wenn du eine fundierte, vielschichtige Einschätzung zu einer wichtigen Entscheidung brauchst.\nInput: Eine Beschreibung deiner Rolle/Kontext und eine Zusammenfassung deiner Entscheidung.\nOutput: Kritische Fragen zum Kontext, vier Perspektiven mit Gewinn/Verlust-Abwägungen, eine Expertenbewertung und Verbesserungsvorschläge",
+      "content": "Ich bin {{rolle}}. Ich habe mich entschieden, {{entscheidung}}.\n\nBitte fungiere als gründlicher Kritiker mit Fachkenntnissen in professionellem Schreiben, Grammatik, Logik und Philosophie.\n\nSchritt 1:  \nAnalysiere meine Beschreibung der Entscheidung.  \n- Ist der Kontext ausreichend beschrieben?  \n- Welche klärenden Fragen müssen beantwortet werden, um die Situation vollständig zu verstehen?  \n\nSchritt 2:  \nNehme vier verschiedene Personas an, um die Entscheidung aus vier unterschiedlichen Perspektiven zu bewerten. Für jede Persona gib bitte an:  \n1. Was ich gewinne, wenn ich die Sache TUE.  \n2. Was ich gewinne, wenn ich die Sache NICHT tue.  \n3. Was ich verliere, wenn ich die Sache TUE.  \n4. Was ich verliere, wenn ich die Sache NICHT tue.  \n\n(Beispiele für Personas: \"Der praktische Realist\", \"Der risikofreudige Visionär\", \"Der langfristige Stratege\", \"Der einfühlsame Berater\". Du kannst auch eigene wählen, die besser passen.)  \n\nSchritt 3:  \nWerde nun zum Experten auf dem relevanten Gebiet (z. B. erfahrener Hausbaumanager, Facharzt, Finanzberater o. Ä.) und wähle die Perspektive oder Kombination von Perspektiven aus, die für diese Entscheidung am besten geeignet ist.  \n\nSchritt 4:  \nErkläre kurz, warum diese Expertenperspektive der beste Ansatz ist. Beziehe dich dabei auf Details aus den vier Personas.  \nWeise auf Annahmen oder logische Lücken in meiner Beschreibung hin und mache Verbesserungsvorschläge.  \nKorrigiere gegebenenfalls grammatikalische und stilistische Fehler.  \n",
+      "tags": [
+        "Coaching",
+        "Entscheidungsfindung",
+        "Analyse",
+        "Perspektiven",
+        "Expertenmeinung",
+        "Rollenmodell",
+        "Abwägung",
+        "Strategie",
+        "Reflexion"
+      ],
+      "id": 1749294592843,
+      "created": "2025-06-07T11:09:52.843Z",
+      "updated": "2025-06-07T11:09:52.843Z"
+    },
+    {
+      "title": "Ethischer Dilemma-Navigator",
+      "category": "cat_1749292490657",
+      "shortDescription": "Hilft, komplexe ethische Dilemmata aus mehreren Perspektiven objektiv zu durchdenken.",
+      "fullDescription": "Zweck: Unterstützt Nutzer dabei, komplexe ethische Dilemmata strukturiert zu analysieren und verschiedene Perspektiven einzunehmen.\nAnwendung: Wenn du eine fundierte ethische Entscheidungsfindung mit Reflexion und unterschiedlichen ethischen Rahmen suchst.\nInput: Beschreibe dein ethisches Dilemma und Kontext.\nOutput: Erhalte eine vielschichtige Analyse, inklusive ethischer Prinzipien, Konsequenzen und Reflexionsfragen.\nTipps: Halte den Kontext detailliert, um bestmögliche Ergebnisse zu erhalten.",
+      "content": "Ich bin {{Rolle}} und stehe vor folgendem ethischen Dilemma:\n{{Beschreibung_des_ethischen_Dilemmas}}\n\nBitte hilf mir dabei, dieses Dilemma systematisch zu durchdenken:\n\t1.\tIdentifiziere relevante Kernprinzipien der Ethik.\n\t2.\tErkläre das Dilemma aus verschiedenen ethischen Theorien, z. B. Utilitarismus, Deontologie, Tugendethik, Care-Ethik.\n\t3.\tBeschreibe mögliche kurz- und langfristige Konsequenzen der verschiedenen Handlungsoptionen.\n\t4.\tErkenne moralische Graubereiche und Zielkonflikte.\n\t5.\tStelle Reflexionsfragen, die mir helfen, meine persönliche Haltung zu klären.\n\t6.\tEmpfehle gegebenenfalls weiterführende Ressourcen.\n\nBitte bleibe dabei objektiv, neutral und fördere kritisches Denken sowie verantwortungsvolle Entscheidungen.",
+      "tags": [
+        "Coaching",
+        "Ethik",
+        "Entscheidungsfindung",
+        "Perspektiven",
+        "Reflexion"
+      ],
+      "id": 1749295336659,
+      "created": "2025-06-07T11:22:16.659Z",
+      "updated": "2025-06-07T13:24:28.889Z"
+    },
+    {
+      "title": "Ideen validieren und in umsetzbare Pläne überführen",
+      "category": "cat_1749292490657",
+      "shortDescription": "Prüfe und plane deine Ideen mit detaillierter Umsetzung und Teststrategie inkl. passendem Code.Nutze möglichst viel Kontext (Zielgruppe, Anwendungsfal",
+      "fullDescription": "Zweck: Entwickelt einen detaillierten Umsetzungs- und Testplan für eine Idee.\nAnwendung: Wenn du prüfen willst, ob eine Idee tragfähig ist und wie sie konkret umgesetzt werden kann.\nInput: Deine Idee (so ausführlich wie möglich).\nOutput: Validierung der Idee, detaillierter Umsetzungsplan, ggf. vollständiger Code.\nTipps: Gib maximalen Kontext und Hinweise, damit die Antwort bestmöglich ausfällt.Wähle ein leistungsstarkes Modell (z.B. GPT-4o, Gemini 1.5, Claude 3, o1 Modelle).",
+      "content": "Ich habe folgende Idee: {{idee}}.\n\nBitte prüfe, ob diese Idee funktionieren kann.\n\nErstelle dazu:\n\t1.\tEinen detaillierten Plan zur Implementierung.\n\t2.\tEinen Plan, wie die Idee getestet werden sollte.\n\t3.\tFalls sinnvoll oder notwendig: den vollständigen Code zum Testen der Idee.\n\t4.\tNotiere dabei die wichtigsten Annahmen, die du bei der Implementierung und Testplanung getroffen hast.\n\nHinweise: Je detaillierter und kontextreicher die Eingabe, desto besser und brauchbarer wird die Antwort.\n\nNutze aktuelle und effiziente Denkstrategien und bringe dein bestes methodisches Vorgehen ein.",
+      "tags": [
+        "Coaching",
+        "Ideenentwicklung",
+        "Testplan",
+        "Validierung",
+        "Prototyping"
+      ],
+      "id": 1749302514117,
+      "created": "2025-06-07T13:21:54.117Z",
+      "updated": "2025-06-07T13:24:46.349Z"
+    },
+    {
+      "title": "Ultimativen Leitfaden erstellen für jede Fähigkeit, Beruf oder Hobby",
+      "category": "cat_1749292490657",
+      "shortDescription": "Erstelle einen maßgeschneiderten, ausführlichen Leitfaden, um in jeder gewünschten Fähigkeit, Beruf oder Hobby gezielt besser zu werden.",
+      "fullDescription": "Zweck: Erstellt einen umfassenden, gut recherchierten Leitfaden zu einer beliebigen Fähigkeit, einem Beruf oder Hobby.\nAnwendung: Wenn du dich gezielt und effektiv in einem Bereich verbessern möchtest.\nInput: Thema, aktuelles Erfahrungslevel, Lernziele.\nOutput: Maßgeschneiderter, ausführlicher Leitfaden mit Strategien und Tipps.\nTipps: Gib so viel Kontext und Details wie möglich ein.",
+      "content": "Erstelle den ultimativen ausführlichen Leitfaden für {{thema}}.\n\nIch bin derzeit {{erfahrungslevel}} in diesem Bereich.\n\nMein Ziel ist es: {{ziel}}.\n\nBitte liefere:\n\t1.\tEinen strukturierten, gut recherchierten und aktuellen Leitfaden.\n\t2.\tKlare Strategien und Tipps zur gezielten Verbesserung.\n\t3.\tRelevante Quellen oder Best Practices, falls verfügbar.\n\nHinweise:\n\t•\tJe mehr Kontext ich zu meinem Lernziel und meiner bisherigen Erfahrung angebe, desto besser kann der Leitfaden auf meine Bedürfnisse zugeschnitten werden.\n\t•\tNutze Deep Research oder vergleichbare Recherchefunktionen, um fundierte, aktuelle Inhalte einzubinden.",
+      "tags": [
+        "Coaching",
+        "Leitfaden",
+        "Lernen",
+        "Deep Research",
+        "Hobby",
+        "Beruf"
+      ],
+      "id": 1749302854517,
+      "created": "2025-06-07T13:27:34.517Z",
+      "updated": "2025-06-07T13:27:34.517Z"
+    },
+    {
+      "title": "Praxisnaher Lernleitfaden aus Online-Informationen erstellen",
+      "category": "cat_1749292490657",
+      "shortDescription": "Verdichte Online-Informationen zu einem praxisnahen Lernleitfaden für jedes gewünschte Thema, um schnelles und gezieltes Lernen zu ermöglichen.",
+      "fullDescription": "Zweck: Erzeugt einen prägnanten und praxisnahen Leitfaden zu einem frei wählbaren Thema auf Basis aktueller Online-Informationen.\nAnwendung: Wenn du dich in kurzer Zeit gezielt in ein Thema einarbeiten willst.\nInput: Thema und gewünschter Anwendungsfokus.\nOutput: Klar strukturierter Leitfaden mit direkt umsetzbaren Erkenntnissen.\nTipps: Präzisiere dein Ziel und Kontext, um optimale Ergebnisse zu bekommen.",
+      "content": "Ich möchte meine Kenntnisse in {{thema}} gezielt verbessern.\n\nBitte durchsuche aktuelle und hochwertige Online-Quellen und erstelle daraus einen praxisnahen Lernleitfaden.\n\nZiele und Vorgaben:\n\t1.\tKonzentriere dich auf die 30 % wertvollsten, aufschlussreichsten und praktischsten Aspekte des Themas.\n\t2.\tDer Leitfaden soll folgende Eigenschaften erfüllen:\n\n\t•\tKontextabhängig und sachdienlich: Auf mein Thema zugeschnitten, enthält Grundlagen und fortgeschrittene Konzepte sowie aktuelle Trends und Best Practices mit vielen Beispielen.\n\t•\tRollenorientiert und fachkundig kuratiert: Agiere als Forschungsexperte. Nutze Quellen wie Bücher, Artikel, Kurse und Videos.\n\t•\tPraxisnah und prägnant: Umsetzbare Strategien, Schlüsselpunkte und Techniken, ohne unnötigen Fachjargon.\n\t•\tKlar strukturiert: Mit Überschriften, Unterüberschriften und Aufzählungen, so aufbereitet, dass der Leitfaden in ca. 30 Minuten erlernbar ist.\n\t•\tGeschäftlich nutzbar: Geeignet für den praktischen Einsatz im geschäftlichen Umfeld, sowohl für Anfänger als auch für Fortgeschrittene.\n\nBitte nimm dir Zeit für gründliche Recherche und liefere einen umfassenden und zugleich prägnanten Leitfaden. Ziel ist es, schnelles und effizientes Lernen zu ermöglichen und neue Fähigkeiten direkt anwenden zu können.\n",
+      "tags": [
+        "Coaching",
+        "Lernleitfaden",
+        "Deep Research",
+        "Kompetenzaufbau",
+        "Weiterbildung",
+        "Effizienz"
+      ],
+      "id": 1749304310406,
+      "created": "2025-06-07T13:51:50.406Z",
+      "updated": "2025-06-07T13:51:50.406Z"
+    },
+    {
+      "title": "Höflich und professionell “Nein” sagen — Gesprächstraining",
+      "category": "cat_1749292490657",
+      "shortDescription": "Trainiere, wie du professionell und empathisch “Nein” sagst – in realistischen Gesprächssimulationen mit Feedback und verschiedenen Varianten.",
+      "fullDescription": "Zweck: Trainiert, wie man höflich und professionell eine Anfrage ablehnt.\nAnwendung: Bei heiklen Absagen im beruflichen oder privaten Kontext.\nInput: Kontext der Ablehnung, Beziehung zum Gegenüber.\nOutput: Gesprächsübung mit Echtzeit-Feedback und Varianten.\nTipps: Nutze die Variante-Funktion, um deine Kommunikation gezielt zu verbessern.",
+      "content": "Simuliere mit mir ein Gespräch, in dem ich eine Anfrage ablehnen möchte.\n\nMein Ziel: Ich möchte {{anfrage}} ablehnen, ohne die Beziehung zu {{gegenüber}} zu belasten.\n\nDeine Rolle: Du bist {{gegenüberbeschreibung}} und stellst die Anfrage.\n\t•\tDu fragst nach Gründen.\n\t•\tDu kannst evtl. enttäuscht oder irritiert reagieren, bleibst dabei höflich.\n\t•\tGib mir Raum für meine Antwort.\n\t•\tAntworte ehrlich.\n\t•\tGib mir danach Feedback zur Wirkung und Ton meiner Formulierung (max. 3 Bulletpoints).\n\nExtra-Boost:\nWenn ich “Varianten bitte” schreibe, gib mir 3 Versionen meiner Ablehnung:\n\t1.\tNeutral\n\t2.\tEmpathisch\n\t3.\tDurchsetzungsstark\n\nZiel: Ich möchte üben, professionell und wertschätzend “Nein” zu sagen, ohne negative emotionale Reaktionen hervorzurufen.\n",
+      "tags": [
+        "Coaching",
+        "Kommunikation",
+        "Gesprächstraining",
+        "Nein sagen",
+        "Ablehnung",
+        "Feedback",
+        "Empathie"
+      ],
+      "id": 1749305880461,
+      "created": "2025-06-07T14:18:00.461Z",
+      "updated": "2025-06-07T14:18:00.461Z"
+    },
+    {
+      "title": "Song-Analyse für lizenzfreie Musik-Suche",
+      "category": "cat_1749292490657",
+      "shortDescription": "Analysiere einen Song und erhalte Such-Tags, um ähnliche lizenzfreie Musik für Projekte zu finden ",
+      "fullDescription": "Zweck: Zerlegt einen Song in klangliche Elemente, Emotion, Genre-Einflüsse, Instrumentierung, Tempo und generiert durchsuchbare Tags für lizenzfreie Musik.\nAnwendung: Wenn du Musik mit ähnlicher Stimmung wie einen bekannten Song suchst, ohne die Rechte zu besitzen.\nInput: Songtitel {{song_title}} und Künstler {{artist}}\nOutput: Liste von 15-20 durchsuchbaren Tags zur Suche auf Musikplattformen\nTipps: Ersetze {{song_title}} und {{artist}} mit deinem Wunsch-Song und nutze die Tags auf Plattformen ",
+      "content": "Zerlege den Song ‘{{song_title}}’ von {{artist}} in seine wichtigsten klanglichen Elemente, den emotionalen Ton, die Genre-Einflüsse, die Instrumentierung, das Tempo und alle Schlüsselwörter, die ich suchen könnte, um lizenzfreie Musik mit einem ähnlichen Vibe zu finden. Formatiere die Ergebnisse als eine Liste von 15-20 durchsuchbaren Tags, die ich auf einer lizenzfreien Musikseite verwenden kann.",
+      "tags": [
+        "Kreativität",
+        "Unterhaltung",
+        "Musikanalyse",
+        "Lizenzfreie Musik"
+      ],
+      "id": 1749367854331,
+      "created": "2025-06-08T07:30:54.331Z",
+      "updated": "2025-06-08T07:32:21.736Z"
+    },
+    {
+      "title": "Interaktives Verhandlungstraining mit Feedback und Schwierigkeitsanpassung",
+      "category": "cat_1749292490657",
+      "shortDescription": "Trainiere deine Verhandlungskompetenz in interaktiven Rollenspielen mit Feedback und anpassbarem Schwierigkeitsgrad.",
+      "fullDescription": "Zweck: Simuliert interaktive Verhandlungssituationen mit sofortigem Feedback und individueller Schwierigkeitsanpassung.\nAnwendung: Wenn du deine Verhandlungsfähigkeiten gezielt trainieren und weiterentwickeln willst.\nInput: Verhandlungsthema, Rollenbeschreibung.\nOutput: Gesprächsverlauf mit Echtzeit-Feedback, Bewertung und Verbesserungsvorschlägen.\nTipps: Antworte authentisch und nutze das Feedback aktiv für deine Lernfortschritte.",
+      "content": "Du bist mein Verhandlungs-Coach.\n\nSimuliere ein realistisches Verhandlungsszenario zu folgendem Thema: {{verhandlungsthema}}.\n\nRollen:\n\t•\tDu spielst die Rolle von {{gegenpartei}}.\n\t•\tIch spiele die Rolle von {{meinerolle}}.\n\nAblauf:\n\t1.\tSimuliere das Verhandlungsgespräch und starte mit einer ersten Aussage oder Frage.\n\t2.\tBitte mich um meine Reaktion und warte, bis ich sie gegeben habe.\n\t3.\tNach meiner Antwort:\n\t•\tBeschreibe, wie die Gegenseite darauf reagiert (inhaltlich und emotional).\n\t•\tBewerte meine Antwort (Note + Begründung).\n\t•\tGib mir konkrete Rückmeldung und Tipps, wie ich die Wissenschaft des Verhandelns besser anwenden kann.\n\t4.\tSchwierigkeitsanpassung:\n\t•\tBei guter Leistung → schwierigeres Szenario.\n\t•\tBei schwacher Leistung → einfacheres Szenario.\n\nZiel: Ich möchte meine Verhandlungsfähigkeiten kontinuierlich verbessern und lernen, flexibel und souverän auf verschiedene Gesprächslagen zu reagieren.",
+      "tags": [
+        "Verhandlung",
+        "Coaching",
+        "Gesprächssimulation",
+        "Feedback",
+        "Rhetorik",
+        "Rollenspiel",
+        "Training"
+      ],
+      "id": 1749374485038,
+      "created": "2025-06-08T09:21:25.038Z",
+      "updated": "2025-06-08T09:21:25.038Z"
+    },
+    {
+      "title": "Fortgeschrittenes interaktives Verhandlungstraining mit Zielen & Rahmenbedingungen",
+      "category": "cat_1749292490657",
+      "shortDescription": "Trainiere komplexe Verhandlungssituationen mit definierten Zielen und Rahmenbedingungen – dynamisches Feedback und Schwierigkeitsanpassung inklusive.",
+      "fullDescription": "Zweck: Trainiert Verhandlungen gezielt mit definierten Verhandlungszielen, Rahmenbedingungen und persönlicher Priorisierung.\nAnwendung: Vorbereitung auf konkrete Verhandlungssituationen oder systematisches Training komplexer Verhandlungsskills.\nInput: Verhandlungsthema, Rollen, Verhandlungsziel(e), Rahmenbedingungen, Prioritäten.\nOutput: Realistisches Verhandlungstraining mit dynamischem Feedback und Schwierigkeitssteuerung.\nTipps: Nutze eigene reale Szenarien und reflektiere nach jeder Runde ge",
+      "content": "Du bist mein fortgeschrittener Verhandlungs-Coach.\n\nSimuliere ein realistisches Verhandlungsszenario zu folgendem Thema: {{verhandlungsthema}}.\n\nRollen:\n\t•\tDu spielst die Rolle von {{gegenpartei}}.\n\t•\tIch spiele die Rolle von {{meinerolle}}.\n\nMein Verhandlungsziel / Zielkorridor:\n{{verhandlungsziel}}\n\nRahmenbedingungen (z. B. Budgetgrenzen, Zeitdruck, politische Zwänge):\n{{rahmenbedingungen}}\n\nPersönliche Verhandlungsschwerpunkte (z. B. Beziehung erhalten, Win-Win, maximale Ersparnis, langfristige Partnerschaft, Image):\n{{verhandlungsschwerpunkte}}\n\nAblauf:\n\t1.\tSimuliere das Verhandlungsgespräch und starte mit einer ersten Aussage oder Frage.\n\t2.\tBitte mich um meine Reaktion und warte, bis ich sie gegeben habe.\n\t3.\tNach meiner Antwort:\n\t•\tBeschreibe, wie die Gegenseite darauf reagiert (inhaltlich und emotional).\n\t•\tBewerte meine Antwort (Note + Begründung).\n\t•\tGib mir konkrete Rückmeldung und Tipps, wie ich die Wissenschaft des Verhandelns in diesem Kontext besser anwenden kann.\n\t•\tBewerte dabei auch, inwieweit ich mein definiertes Verhandlungsziel im Blick behalten habe.\n\t4.\tSchwierigkeitsanpassung:\n\t•\tBei guter Leistung → schwierigeres Szenario oder härtere Gegenseite.\n\t•\tBei schwacher Leistung → einfacheres Szenario oder konstruktivere Gegenseite.\n\nZiel: Ich möchte meine Verhandlungsfähigkeiten auf hohem Niveau trainieren und lernen, zielorientiert und situativ flexibel zu agieren.\n",
+      "tags": [
+        "Verhandlung",
+        "Advanced Coaching",
+        "Rollenspiel",
+        "Gesprächssimulation",
+        "Feedback",
+        "Strategie",
+        "Training",
+        "Zielorientierung"
+      ],
+      "id": 1749374955666,
+      "created": "2025-06-08T09:29:15.666Z",
+      "updated": "2025-06-08T09:29:15.666Z"
+    },
+    {
+      "title": "Universeller Prompt für maßgeschneiderte Agentenprofile",
+      "category": "cat_1749292670997",
+      "shortDescription": "Erzeuge individuelle Agentenprofile für jede Aufgabe – vielseitig einsetzbar für GPT-Bots, Rollenspiele und Experten-Simulationen.",
+      "fullDescription": "Zweck: Erstelle für jede beliebige Anweisung ein passgenaues Agentenprofil in der zweiten Person, um die optimale Kompetenz und Eignung für die Aufgabe darzustellen.\nAnwendung: Nutze den Prompt für Rollenspiele, GPT-Bots, Experten-Simulationen, Storytelling, Trainingsmaterial oder systemische Promptarchitektur.\nInput: Eine frei formulierte AnweisungOutput: Eine lebendige und fundierte Agentenbeschreibung im gewünschten Stil.\nTipps: Ideal für systemisches Prompt-Design. Achte auf eine klare und p",
+      "content": "Du bist darauf spezialisiert, für jede beliebige Anweisung ein maßgeschneidertes und überzeugendes Agentenprofil zu erstellen.\n\n**Ziel:** Erstelle eine hochwertige und detaillierte Beschreibung der fähigsten und geeignetsten Person (Agent*in), die die jeweilige Aufgabe optimal bearbeiten kann.  \n**Perspektive:** Schreibe aus der **zweiten Person** (Sie sind ...).  \n\n**Anforderungen an die Beschreibung:**  \n- Zeige klar den fachlichen Hintergrund und die Qualifikationen.  \n- Betone die spezifischen Fähigkeiten und die relevante Erfahrung.  \n- Stelle dar, warum diese Person besonders geeignet ist.  \n- Nutze einen lebendigen, vertrauensvollen und fachlich kompetenten Stil.  \n- Vermeide Floskeln, stattdessen konkrete Formulierungen und Details.  \n- Optional: Gehe auf typische Herausforderungen der Aufgabe und die besondere Befähigung des Agenten ein.\n\n**Input:**  \n[Instruction]: {{instruction}}\n\n**Output:**  \n[Agent Description]: (hier die ausführliche Agentenbeschreibung)\n\n**Beispiele:**  \n\n[Instruction]: Erstelle eine Liste von fünf möglichen Folgen der Entwaldung.  \n[Agent Description]: Sie sind Umweltwissenschaftler*in mit Schwerpunkt Ökosystemforschung und dem Zusammenspiel zwischen menschlichen Aktivitäten und natürlichen Lebensräumen. Ihr umfangreiches Wissen erstreckt sich auf [...]  \n\n[Instruction]: Formuliere einen bildhaften Ausdruck, der eine Sonnenfinsternis beschreibt.  \n[Agent Description]: Sie sind Astronom*in mit tiefgehender Expertise in Himmelsereignissen und -phänomenen. [...]  \n\n[Instruction]: Bestimme die Wortarten im Satz: „The dog barked at the postman.“  \n[Agent Description]: Sie sind Linguist*in und verfügen über ein tiefes Verständnis von Sprachstruktur und Grammatik. [...]  ",
+      "tags": [
+        "Agentenprofile",
+        "GPT-Promptbau",
+        "Rollenbeschreibung",
+        "Personas",
+        "Schreibhilfe",
+        "Expertenprofil"
+      ],
+      "id": 1749386621058,
+      "created": "2025-06-08T12:43:41.058Z",
+      "updated": "2025-06-08T12:47:30.808Z"
+    },
+    {
+      "title": "System-Prompt: Agentenprofil-Generator für Aufgabenbeschreibung",
+      "category": "cat_1749292644415",
+      "shortDescription": "Professioneller Prompt für automatisierte Systeme zur Erzeugung präziser Expertenprofile für beliebige Aufgaben.",
+      "fullDescription": "Zweck: Generiert ein präzises Agentenprofil für jede definierte Aufgabe – ideal für strukturierte Systeme und Automationen.\nAnwendung: In Prompt-Ketten, Systemprompts, API-Aufrufen oder dynamisch generierten GPT-Dialogen.\nInput: Eine konkrete Anweisung oder Aufgabe im Format {{instruction}}\nOutput: Eine strukturierte, fachlich fundierte Beschreibung der idealen Person zur Lösung der Aufgabe.\nTipps: Für  Klarheit Aufgaben aktiv formulieren (z. B. „Analysiere…“, „Erkläre…“, „Beschreibe…“).",
+      "content": "Systemrolle: Du bist ein Agentenprofil-Generator.  \nAufgabe: Erstelle ein Agentenprofil für eine spezifizierte Aufgabe.  \nZiel: Die Beschreibung stellt die fähigste Person dar, die diese Aufgabe erfüllen kann.  \nFormat: Schreibe aus der Perspektive der zweiten Person („Sie sind ...“).  \n\nStruktur des Outputs:  \n[Agent Description]: {{output}}\n\nKontext:  \nDu generierst ein überzeugendes, glaubwürdiges Expertenprofil. Die Beschreibung enthält folgende Punkte:  \n- Fachgebiet & Qualifikationen  \n- Erfahrung & Spezialisierung  \n- Besondere Kompetenzen  \n- Warum diese Person für die Aufgabe ideal ist  \n- Optionale bildhafte Sprache, wenn passend  \n\nInput-Variable:  \n[Instruction]: {{instruction}}\n\nBeispielinput:  \n[Instruction]: Analysiere die psychologischen Auswirkungen von Einsamkeit im Alter.  \n\nBeispielformulierter Output:  \n[Agent Description]: Sie sind Gerontopsycholog*in mit fundierter Ausbildung in Alterspsychologie und sozialer Isolation. In Ihrer Laufbahn haben Sie zahlreiche Studien zur Einsamkeit im höheren Lebensalter geleitet. [...]  \n\nJetzt Aufgabe umsetzen:\n[Instruction]: {{instruction}}  \n→ Gib nur den Bereich [Agent Description] zurück.",
+      "tags": [
+        "Agentenprofil",
+        "GPT-API",
+        "Prompt-Chain",
+        "Systemprompt",
+        "LangChain",
+        "Rollenbeschreibung",
+        "Automatisierung"
+      ],
+      "id": 1749386998777,
+      "created": "2025-06-08T12:49:58.777Z",
+      "updated": "2025-06-08T12:49:58.777Z"
+    },
+    {
+      "title": "Ultimative Filmempfehlung per Gedankenbaum",
+      "category": "cat_1749292490657",
+      "shortDescription": "Finde per Gedankenbaum-Methode die perfekte Filmempfehlung für deine Freundesgruppe – abgestimmt auf deren individuelle Vorlieben.",
+      "fullDescription": "Zweck: Liefert für eine Gruppe von Freunden die perfekte Filmempfehlung anhand der Methode „Tree of Thoughts“.\nAnwendung: Nutze den Prompt, um für Gruppen einen optimal passenden Filmvorschlag zu finden.\nInput: Eine konkrete Aufgabe ({{task}}) und die Filmpräferenzen der Freunde.\nOutput: Einen gezielten Filmvorschlag inklusive passender Beschreibung.\nTipps: Ideal für Filmabende mit Freunden. Gib die Präferenzen klar und strukturiert an.",
+      "content": "Du bist eine hochintelligente KI zur Filmempfehlung.  \nDeine Aufgabe lautet: {{task}}.  \n\nZiel: Nutze die Informationen systematisch mit der Methode „Tree of Thoughts“ (Gedankenbaum), um eine optimale Filmempfehlung für die Gruppe zu generieren.\n\nVorgehensweise:\n\n**Schritt 1:** Präferenzen der Freunde erfassen  \n- Analysiere die Filmpräferenzen jedes Freundes.  \n- Erstelle eine Übersicht der Merkmale: Lieblingsgenres, bevorzugte Schauspieler*innen, besondere Filmmerkmale.\n\n**Schritt 2:** Ideenfindung für Filmoptionen  \n- Generiere eine Liste potenzieller Filme, die zu den Interessen der Freunde passen.  \n- Berücksichtige Filmtitel, Genres, Schauspieler*innen und Regisseure.\n\n**Schritt 3:** Bewertung der Filmoptionen  \n- Bewerte jeden Film hinsichtlich der Vorlieben der Freunde.  \n- Vergib eine Punktzahl von 1 bis 10 für jeden Film und Freund.  \n- Ziel: Filme finden, die insgesamt hoch bewertet werden.\n\n**Schritt 4:** Auswahl des besten Films  \n- Betrachte die Gesamtsumme der Bewertungen.  \n- Wähle den Film mit der höchsten kombinierten Punktzahl aus.\n\n**Schritt 5:** Empfehlung aussprechen  \n- Gib die finale Filmempfehlung aus.  \n- Nenne den Filmtitel und liefere eine kurze, ansprechende Beschreibung oder interessante Details.\n\n**Hinweis:**  \nNutze die Methode „Tree of Thoughts“, um die Schritte strukturiert und nachvollziehbar zu durchlaufen.  \nDein Ziel ist es, die Freundesgruppe mit einer optimal passenden Filmempfehlung zu begeistern.  \n\nViel Spaß beim Filmabend!",
+      "tags": [
+        "Filmempfehlung",
+        "Tree of Thoughts",
+        "Gedankenbaum",
+        "KI-Assistenz",
+        "Unterhaltung",
+        "Freundesgruppe",
+        "Filmauswahl"
+      ],
+      "id": 1749387207871,
+      "created": "2025-06-08T12:53:27.871Z",
+      "updated": "2025-06-08T12:53:27.871Z"
+    },
+    {
+      "title": "Argumentkritik im Stil von Prominenten",
+      "category": "cat_1749292490657",
+      "shortDescription": "Kritisiere ein Argument oder eine Meinung, als wärst du eine prominente Persönlichkeit wie {{Person}} – mit deren typischem Stil und Denkweise.",
+      "fullDescription": "Zweck: Der Prompt hilft dir, ein Argument oder eine Meinung aus der Sicht bekannter Persönlichkeiten kritisch zu hinterfragen.\nAnwendung: Wenn du eine Aussage aus unterschiedlichen, prominenten Perspektiven prüfen möchtest.\nInput: Du gibst ein Argument oder eine Meinung sowie eine prominente Person {{Person}} ein.\nOutput: Du erhältst eine kritische Analyse des Arguments im Stil der angegebenen Person.\nTipps: Nutze echte Charakterzüge und Denkweisen der prominenten Person für authentische Kritik.",
+      "content": "SYSTEM:  \nIch werde dir ein Argument oder eine Meinung darlegen. Deine Aufgabe ist es, dieses kritisch zu hinterfragen und zu kommentieren, als wärst du {{Person}}. Nutze den charakteristischen Stil, die Denkweise und bekannte Aussagen dieser Person, um die Kritik authentisch und pointiert zu gestalten.\n\nINPUT:  \nHier ist das Argument oder die Meinung: {{Argument}}\n\nOUTPUT:  \nKritische Analyse und Kommentar im Stil von {{Person}}.",
+      "tags": [
+        "Analyse & Recherche",
+        "Kritik",
+        "Perspektivwechsel",
+        "Steve Jobs",
+        "Elon Musk",
+        "Meinungsanalyse",
+        "Argumentation"
+      ],
+      "id": 1749488334532,
+      "created": "2025-06-09T16:58:54.532Z",
+      "updated": "2025-06-09T16:58:54.532Z"
+    },
+    {
+      "title": "Argumentanalyse aus verschiedenen Perspektiven",
+      "category": "cat_1749292490657",
+      "shortDescription": "Erstelle Pro- und Contra-Argumente zu {{Thema}} aus verschiedenen Perspektiven, inklusive Charaktereigenschaften und Bewertung der stärksten Argumente",
+      "fullDescription": "Zweck: Der Prompt erzeugt eine Analyse eines Arguments {{Thema}} aus unterschiedlichen Perspektiven.\nAnwendung: Wenn du vielfältige Sichtweisen zu einem kontroversen Thema betrachten möchtest.\nInput: Du gibst an, ob das Argument {{für_gegen}} und das Thema {{Thema}} lautet.\nOutput: Du erhältst eine Beschreibung der Charaktereigenschaften, eine Zusammenfassung der Argumente aus den Perspektiven und eine Bewertung, welches Argument am überzeugendsten ist – inklusive Begründung.\nTipps: Achte darauf",
+      "content": "SYSTEM:  \nDu sollst ein Argument {{für_gegen}} {{Thema}} aus verschiedenen, vielfältigen Perspektiven darstellen. \n\nSCHRITT 1:  \nNenne die Eigenschaften der verschiedenen Charaktere, die diese Perspektiven vertreten.\n\nSCHRITT 2:  \nFormuliere für jeden Charakter ein Argument {{für_gegen}} {{Thema}}.\n\nSCHRITT 3:  \nFasse die Argumente zusammen.\n\nSCHRITT 4:  \nBewerte, welcher Charakter das stärkste Argument vorbringt, und erkläre, warum.\n\nINPUT:  \nThema: {{Thema}}  \nPosition: {{für_gegen}}  (z. B. \"für\" oder \"gegen\")\n\nOUTPUT:  \nEine strukturierte Analyse mit Charaktereigenschaften, Argumenten, Zusammenfassung und Bewertung.",
+      "tags": [
+        "Analyse & Recherche",
+        "Argumentation",
+        "Perspektiven",
+        "Debatte",
+        "Pro & Contra",
+        "Analyse",
+        "Charaktere"
+      ],
+      "id": 1749488566937,
+      "created": "2025-06-09T17:02:46.937Z",
+      "updated": "2025-06-09T17:02:46.937Z"
+    },
+    {
+      "title": "Expertendiskussion oder Debatte simulieren",
+      "category": "cat_1749292490657",
+      "shortDescription": "Simuliere eine strukturierte Expertendiskussion oder Debatte zu einem frei wählbaren Thema mit klar abgegrenzten Expertenprofilen.",
+      "fullDescription": "Zweck: Dieser Prompt simuliert eine dynamische Expertendiskussion oder Debatte zu einem klar definierten Thema.\nAnwendung: Nutze ihn, um unterschiedliche Fachperspektiven, Argumente und divergierende Meinungen zu einem {{thema}} zu erhalten.\nInput: Gib die gewünschte {{anzahl_experten}} und ein klar abgegrenztes {{thema}} ein.\nOutput: Du erhältst eine strukturierte Expertenrunde, bei der die Expertenprofile klar abgegrenzt sind und ein kontroverser oder differenzierter Austausch erfolgt.\nTipps: ",
+      "content": "Simuliere eine Expertendiskussion zu folgendem Thema:\n\n- Anzahl der Experten: {{anzahl_experten}} (empfohlen 3 bis 5)\n- Thema: {{thema}} (eng definiertes, gut abgegrenztes Themengebiet, idealerweise als Forschungsfrage oder Hypothese formuliert)\n\nVorgehen:\n1. Stelle die einzelnen Experten zunächst vor. Definiere ihre Expertise so scharf wie möglich und grenze ihre Perspektiven klar voneinander ab.\n2. Hebe besondere Schwerpunkte, Einstellungen oder Interessen der Experten hervor. Achte dabei insbesondere auf potenzielle Divergenzen oder kontroverse Sichtweisen.\n3. Führe eine strukturierte Diskussion durch, die auch kritische Aspekte, mögliche Probleme und Risiken explizit behandelt.\n4. Vermeide künstlichen Konsens. Stelle sicher, dass bei unterschiedlichen oder kontroversen Fragestellungen divergierende Positionen betont werden.\n\nHinweis:\nDas Tool neigt dazu, positive Konsensantworten zu generieren. Achte daher aktiv darauf, kritische Differenzen und kontroverse Argumente zwischen den Experten hervorzuheben.",
+      "tags": [
+        "Analyse & Recherche",
+        "Expertendiskussion",
+        "Debatte",
+        "Simulation",
+        "Meinungsvielfalt",
+        "Kritische Diskussion",
+        "Forschung",
+        "Expertenrunde",
+        "Perspektiven"
+      ],
+      "id": 1749489003388,
+      "created": "2025-06-09T17:10:03.388Z",
+      "updated": "2025-06-09T17:10:03.388Z"
+    },
+    {
+      "title": "Kreativer Ideenscout für Branchen-Innovation",
+      "category": "cat_1749292457864",
+      "shortDescription": "Erhalte kreative Ideen für dein Branchenthema in 3 Kategorien – ideal für Innovationsworkshops und Produktentwicklung.",
+      "fullDescription": "Zweck: Entwickelt kreative Ideen für ein frei wählbares Branchenthema.\nAnwendung: Bei Innovation, Produktentwicklung oder kreativen Meetings.\nInput: Branche, Thema, gewünschte Ideen-Kategorien.\nOutput: 3 Ideen pro Kategorie.\nTipps: Eignet sich hervorragend zur Vorbereitung von Workshops, Pitch-Präsentationen oder zur Ideenanreicherung für bestehende Produkte.",
+      "content": "Du bist ein kreativer Ideenscout für die {{branche}}.\nGib mir Ideen zu folgendem Thema: {{thema}}.\nBitte generiere jeweils 3 Ideen in folgender Art: leicht umsetzbar/ kostengünstig realistisch / out of the box.",
+      "tags": [
+        "Ideenfindung",
+        "Innovation",
+        "Branchenideen",
+        "Kreativität",
+        "Produktentwicklung",
+        "Brainstorming"
+      ],
+      "id": 1749625820167,
+      "created": "2025-06-11T07:10:20.167Z",
+      "updated": "2025-06-11T07:10:20.167Z"
+    },
+    {
+      "title": "KI-Assistent für Zeitreise-Szenarien und deren Auswirkungen",
+      "category": "cat_1749292490657",
+      "shortDescription": "Ein KI-Assistent erklärt physikalische, philosophische und ethische Aspekte hypothetischer Zeitreise-Szenarien.",
+      "fullDescription": "Zweck: Der Prompt erzeugt einen KI-Assistenten, der komplexe hypothetische Zeitreise-Szenarien analysiert und deren physikalische, philosophische sowie ethische Auswirkungen erklärt.\nAnwendung: Wenn du tief in Zeitreise-Themen eintauchen und mögliche Konsequenzen, Paradoxien und moralische Fragen verstehen möchtest.\nInput: Du beschreibst ein spezifisches Zeitreise-Szenario oder eine Fragestellung.\nOutput: Eine detaillierte, verständliche Analyse der Folgen, Paradoxien und ethischen Überlegungen im freundlichen, ansprechenden Stil.\nTipps: Formuliere klare Szenarien und nutze den Assistenten für interaktive Diskussionen.",
+      "content": "Du bist ein KI-Assistent mit Fachwissen in Physik, Philosophie und Science-Fiction.  \nDeine Aufgabe ist es, Benutzer:innen dabei zu unterstützen, die Auswirkungen hypothetischer Zeitreise-Szenarien zu erforschen und zu verstehen.  \n\n- Biete detaillierte Einblicke in potenzielle Konsequenzen und Paradoxien.  \n- Erkläre ethische Überlegungen, die mit jedem spezifischen Szenario verbunden sind.  \n- Führe ein freundliches, ansprechendes und interaktives Gespräch.  \n\nINPUT:  \nBeschreibe ein spezifisches Zeitreise-Szenario oder eine Fragestellung.\n\nOUTPUT:  \nEine fundierte, verständliche Analyse der physikalischen, philosophischen und ethischen Aspekte des Szenarios.\n",
+      "tags": [
+        "Zeitreise",
+        "Physik",
+        "Philosophie",
+        "Science-Fiction",
+        "Ethik",
+        "Paradoxien",
+        "Szenarioanalyse",
+        "KI-Assistent"
+      ],
+      "id": 1749661897587,
+      "created": "2025-06-11T17:11:37.587Z",
+      "updated": "2025-06-11T17:11:37.587Z"
+    },
+    {
+      "title": "Bedeutung und Ursprung von Redewendungen und Sprichwörtern erklären",
+      "category": "creative",
+      "shortDescription": "Erklärt Bedeutung, Ursprung und Hintergrund von Redewendungen oder Sprichwörtern kompakt und verständlich.",
+      "fullDescription": "Zweck: Dieser Prompt liefert eine prägnante und fundierte Erklärung der Bedeutung und des Ursprungs einer Redewendung oder eines Sprichworts.\nAnwendung: Nutze ihn, um Redewendungen oder Sprichwörter besser zu verstehen oder zu erklären, z. B. für Texte, Referate, Unterricht oder Content-Erstellung.\nInput: Gib eine {{redewendung}} oder ein {{sprichwort}} ein.\nOutput: Du erhältst eine leicht verständliche Interpretation der Bedeutung sowie eine historische und kulturelle Einordnung inklusive Herkunft, Geschichten oder Theorien.\nTipps: Besonders hilfreich für kreative Texte, Unterricht oder wenn du sprachliche Hintergründe verstehen möchtest.\n",
+      "content": "Erkläre die Bedeutung und den Ursprung von folgender Redewendung oder folgendem Sprichwort:\n\n{{redewendung}}\n\n1. Gib eine klare, prägnante Erklärung der figurativen Bedeutung und wie sie typischerweise verwendet wird.\n2. Beschreibe den Ursprung, historischen Kontext, kulturelle Hintergründe oder etymologische Informationen.\n3. Füge interessante Geschichten, Anekdoten oder Theorien zum Ursprung hinzu, falls vorhanden.\n",
+      "tags": [
+        "Redewendungen",
+        "Sprichwörter",
+        "Erklärung",
+        "Ursprung",
+        "Etymologie",
+        "Sprache",
+        "Bedeutung",
+        "Kultur",
+        "Geschichte"
+      ],
+      "id": 1749662312739,
+      "created": "2025-06-11T17:18:32.739Z",
+      "updated": "2025-06-11T17:18:39.451Z"
+    },
+    {
+      "title": "Kreative Eselsbrücken für Merkliste generieren",
+      "category": "creative",
+      "shortDescription": "Erstelle kreative Eselsbrücken, um beliebige Listen oder Namen schnell und nachhaltig zu merken. <u>**Zweck:**</u>\n",
+      "fullDescription": "Zweck: Erstellt kreative Eselsbrücken, um beliebige Listen leichter zu merken.\nAnwendung: Wenn du dir Begriffe, Namen oder andere Listen merken willst – z. B. für Prüfungen, Vorträge oder im Alltag.\nInput: Gib eine Liste mit Begriffen, Namen oder Wörtern ein, die du dir merken möchtest ({{liste}}).\nOutput: Du erhältst eine oder mehrere originelle Eselsbrücken, die dir das Erinnern erleichtern.\nTipps: Funktioniert für Fachbegriffe, Namen, Einkaufslisten u. v. m. – ideal für Schule, Beruf und Alltag!",
+      "content": "Ich möchte mir diese Liste merken: {{liste}}  \nErstelle bitte eine originelle Eselsbrücke, die mir hilft, mir alle Begriffe/Namen aus dieser Liste dauerhaft einzuprägen.  \nGib die Eselsbrücke in einprägsamer Form wieder und erkläre kurz, wie sie funktioniert.\n",
+      "tags": [
+        "Gedächtnis",
+        "Merken",
+        "Eselsbrücke",
+        "Listen",
+        "Lernen",
+        "Merktechniken",
+        "Erinnerung",
+        "Memotechnik",
+        "Namen",
+        "Begriffe"
+      ],
+      "id": 1749662940601,
+      "created": "2025-06-11T17:29:00.601Z",
+      "updated": "2025-06-11T17:31:23.822Z"
+    },
+    {
+      "title": "Analyse und Erklärung von Lebensmittel-Inhaltsstoffen",
+      "category": "cat_1749292490657",
+      "shortDescription": "Erstellt eine verständliche Analyse von Inhaltsstoffen mit Herkunft, Wirkung und gesundheitlicher Bewertung – tabellarisch und laienverständlich.\n",
+      "fullDescription": "<u>Zweck:</u> Dieser Prompt liefert eine verständliche Analyse von Lebensmittel-Inhaltsstoffen – inklusive Herkunft, Wirkung und gesundheitlicher Aspekte.\n<u>Anwendung:</u> Verwende ihn, um Zutatenlisten aus Fotos oder Verpackungen verständlich und übersichtlich aufzuschlüsseln, z. B. für Ernährungsberatung, Einkauf oder Wissensvermittlung.\n<u>Input:</u> Lade ein Foto oder eine Liste von Inhaltsstoffen hoch ({{inhaltsstoffe}}).\n<u>Output:</u> Du bekommst eine Tabelle mit Namen, Herkunft/Herstellung, Wirkung und gesundheitlichen Auswirkungen der Inhaltsstoffe – laienverständlich erklärt.\n<u>Tipps:</u> Ideal für alle, die mehr über das „Kleingedruckte“ auf Lebensmitteln wissen wollen – auch al",
+      "content": "Du bist ein erfahrener Lebensmitteltechniker mit besonderer Expertise für Inhaltsstoffe.  \nAnalysiere die folgenden Inhaltsstoffe ({{inhaltsstoffe}}) und gib das Ergebnis in einer übersichtlichen Tabelle mit den Spalten  \n- Name des Inhaltsstoffs  \n- Herkunft/Herstellung  \n- Wirkung im Lebensmittel  \n- Gesundheitliche Auswirkungen (falls bekannt)  \nwieder.  \nErkläre die Inhalte so, dass sie auch für Laien verständlich sind.\n",
+      "tags": [
+        "Lebensmittel",
+        "Inhaltsstoffe",
+        "Analyse",
+        "Wirkung",
+        "Gesundheit",
+        "Erklärung",
+        "Tabelle",
+        "Herstellung",
+        "Herkunft",
+        "Laienverständnis"
+      ],
+      "id": 1749663420534,
+      "created": "2025-06-11T17:37:00.534Z",
+      "updated": "2025-06-11T17:37:00.534Z"
+    },
+    {
+      "title": "Ersteinschätzung zur Gesundheit deines Haustiers",
+      "category": "cat_1749292490657",
+      "shortDescription": "Hilft dir bei der Ersteinschätzung, ob dein Haustier einen Tierarzt braucht, gibt konkrete Tipps und fragt gezielt nach Symptomen.\n",
+      "fullDescription": "<u>Zweck:</u> Gibt dir eine erste Einschätzung, ob dein {{haustier}} professionelle Hilfe braucht oder du selbst aktiv werden kannst.\n<u>Anwendung:</u> Nutze den Prompt, wenn dein Tier Symptome zeigt und du unsicher bist, ob ein Tierarztbesuch nötig ist.\n<u>Input:</u> Gib die Tierart (Hund,Katze, Maus) und die beobachteten Symptome deines Haustiers an (z. B. {{haustier}} und {{symptome}}).\n<u>Output:</u> Du erhältst Schritt-für-Schritt-Fragen zur Eingrenzung des Problems, eine Empfehlung (Tierarzt ja/nein) und Soforttipps für Zuhause.\n<u>Tipps:</u> Dies ist keine medizinische Diagnose, sondern eine erste Hilfestellung – im Zweifel immer zum Tierarzt!",
+      "content": "Mein {{haustier}} zeigt folgende Symptome: {{symptome}}  \nGib mir bitte eine erste Einschätzung, ob ein Tierarztbesuch erforderlich ist oder was ich selbst tun kann.  \nStelle mir Schritt-für-Schritt Fragen, um das Problem besser einzugrenzen.  \nAm Ende gib eine klare Empfehlung, ob ich mit meinem Tier zum Tierarzt muss, und gib Tipps, was ich bis dahin tun kann.  \nHinweis: Dies ist keine medizinische Diagnose, sondern eine Entscheidungshilfe.\n",
+      "tags": [
+        "Haustier",
+        "Gesundheit",
+        "Ersteinschätzung",
+        "Tierarzt",
+        "Entscheidungshilfe",
+        "Tiere",
+        "Notfall",
+        "Beratung",
+        "Symptome",
+        "Tierpflege"
+      ],
+      "id": 1749663623747,
+      "created": "2025-06-11T17:40:23.747Z",
+      "updated": "2025-06-11T17:42:18.830Z"
+    },
+    {
+      "title": "Medizinische Befunde einfach erklärt & Arztfragen generieren",
+      "category": "cat_1749292490657",
+      "shortDescription": "Erklärt dir medizinische Befunde in einfacher Sprache und liefert individuelle Arztfragen, die du gezielt stellen kannst.",
+      "fullDescription": "<u>Zweck:</u> Dieser Prompt hilft dir, medizinische Ergebnisse leicht verständlich zu machen – zugeschnitten auf dein Wissen und deine Bedürfnisse.\n<u>Anwendung:</u> Nutze ihn, wenn du medizinische Befunde oder Laborwerte verständlich erklärt bekommen möchtest und gezielte Fragen für dein Arztgespräch brauchst.\n<u>Input:</u> Füge deine medizinischen Ergebnisse ({{befunde}}), die gewünschte Zielgruppe ({{zielgruppe}}) und den Aspekt ein, zu dem du mehr wissen willst ({{besorgnis}}).\n<u>Output:</u> Du bekommst eine laiengerechte, anschauliche Erklärung und drei kluge Folgefragen, die du beim nächsten Arztbesuch stellen kannst.\n<u>Tipps:</u> Ideal, um Unsicherheiten zu klären und im Gespräch mi",
+      "content": "Hier sind meine medizinischen Ergebnisse: {{befunde}}\n\nBitte erkläre mir diese Ergebnisse so, als wäre ich {{zielgruppe}}.\n\nGib mir außerdem drei gezielte Folgefragen, die ich meinem Arzt zum Thema {{besorgnis}} stellen könnte.\n",
+      "tags": [
+        "Medizin",
+        "Befunde",
+        "Erklärung",
+        "Laienverständnis",
+        "Nachfragen",
+        "Arztgespräch",
+        "Labortest",
+        "Diagnose",
+        "Patientenhilfe",
+        "Kommunikation"
+      ],
+      "id": 1749664012901,
+      "created": "2025-06-11T17:46:52.901Z",
+      "updated": "2025-06-11T17:46:52.901Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "coding",
+      "name": "💻 Programmieren",
+      "parent": null,
+      "children": [],
+      "color": "#0167b1"
+    },
+    {
+      "id": "analysis",
+      "name": "📊 Recherche",
+      "parent": null,
+      "children": [],
+      "color": "#f86201"
+    },
+    {
+      "id": "creative",
+      "name": "🎨 Schreiben_Text",
+      "parent": null,
+      "children": [],
+      "color": "#d40178"
+    },
+    {
+      "id": "programming",
+      "name": "💻 Programmieren",
+      "parent": null,
+      "children": [],
+      "color": "#3498db"
+    },
+    {
+      "id": "cat_1749292426368",
+      "name": "Eigene Custom GPT (GPT-Bots)",
+      "parent": null,
+      "children": [],
+      "color": "#ffc201"
+    },
+    {
+      "id": "cat_1749292457864",
+      "name": "Geschäftlich",
+      "parent": null,
+      "children": [],
+      "color": "#e90817"
+    },
+    {
+      "id": "cat_1749292490657",
+      "name": "Alltag",
+      "parent": null,
+      "children": [
+        "Coaching"
+      ],
+      "color": "#008d35"
+    },
+    {
+      "id": "cat_1749292569586",
+      "name": "Bilder",
+      "parent": null,
+      "children": [],
+      "color": "#c7a374"
+    },
+    {
+      "id": "cat_1749292624681",
+      "name": "Lehre",
+      "parent": null,
+      "children": [],
+      "color": "#7cc603"
+    },
+    {
+      "id": "cat_1749292644415",
+      "name": "Workflows",
+      "parent": null,
+      "children": [],
+      "color": "#c30151"
+    },
+    {
+      "id": "cat_1749292670997",
+      "name": "Promptwerkzeuge",
+      "parent": null,
+      "children": [],
+      "color": "#0167b1"
+    },
+    {
+      "id": "cat_1749294271565",
+      "name": "Coaching",
+      "parent": null,
+      "children": [],
+      "color": "#d4a796"
+    }
+  ],
+  "exportDate": "2025-06-11T17:46:56.660Z",
+  "version": "4.0"
+}

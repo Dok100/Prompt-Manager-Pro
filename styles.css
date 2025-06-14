@@ -1,0 +1,495 @@
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #7b68ee;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --background-color: #f5f7fa;
+  --card-bg: #ffffff;
+  --border-color: #e8eaed;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+}
+
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 30px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.app-header h1 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.8em;
+}
+
+.header-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Buttons */
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: var(--card-bg);
+  min-width: 160px;
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: 0;
+}
+
+/* Search */
+.search-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+#categoryFilter {
+  padding: 10px 15px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+}
+
+/* Main Layout */
+.main-content {
+  display: flex;
+  gap: 20px;
+}
+
+.sidebar {
+  width: 300px;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  height: fit-content;
+}
+
+.content-area {
+  flex: 1;
+}
+
+/* Category Tree */
+.category-tree {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.category-item {
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-item:hover {
+  background: var(--background-color);
+}
+
+.category-item.active {
+  background: rgba(74, 144, 226, 0.1);
+  color: var(--primary-color);
+}
+
+.category-level-1 {
+  margin-left: 20px;
+  border-left: 2px solid var(--border-color);
+  padding-left: 10px;
+}
+
+.category-level-2 {
+  margin-left: 40px;
+  border-left: 2px solid var(--border-color);
+  padding-left: 10px;
+}
+
+/* Prompt Grid */
+.prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.prompt-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.prompt-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.prompt-card-header {
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+}
+
+.prompt-card-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.prompt-card-body {
+  padding: 16px;
+}
+
+.prompt-description {
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.prompt-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.prompt-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.tag {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.prompt-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.prompt-card:hover .prompt-actions {
+  opacity: 1;
+}
+
+.prompt-actions button {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 12px;
+  background: var(--text-secondary);
+}
+
+.btn-execute {
+  background: var(--success-color);
+}
+
+.btn-edit {
+  background: var(--warning-color);
+}
+
+.btn-delete {
+  background: var(--danger-color);
+}
+
+/* Table View */
+.prompt-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: none;
+}
+
+.prompt-table th {
+  background: var(--primary-color);
+  color: white;
+  padding: 15px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.prompt-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.prompt-table tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.prompt-table tr:hover {
+  background: rgba(74, 144, 226, 0.05);
+}
+
+/* Dialogs */
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  width: 600px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-lg);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.dialog-content {
+  padding: 30px;
+}
+
+.dialog-content h2 {
+  margin: 0 0 20px 0;
+  color: var(--primary-color);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+/* Template Preview */
+.template-preview {
+  margin: 20px 0;
+}
+
+.template-preview pre {
+  background: var(--background-color);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* Category Management */
+.category-management {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.category-edit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 6px;
+  background: var(--background-color);
+}
+
+.category-edit-item input[type="text"] {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.category-edit-item input[type="color"] {
+  width: 40px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal-overlay .modal-content {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+/* Toast Notifications */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--success-color);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  z-index: 3000;
+  animation: slideIn 0.3s ease;
+}
+
+.toast.error {
+  background: var(--danger-color);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .prompt-grid {
+    grid-template-columns: 1fr;
+  }
+}

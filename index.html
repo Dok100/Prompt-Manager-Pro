@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompt Manager Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>🤖 Prompt Manager Pro</h1>
+            <div class="header-controls">
+                <button id="categoriesBtn">📁 Kategorien</button>
+                <button id="toggleViewBtn">📊 Tabellenansicht</button>
+                <div class="dropdown">
+                    <button id="menuBtn">⚙️ Menü</button>
+                    <div class="dropdown-content">
+                        <button id="newPromptBtn">+ Neuer Prompt</button>
+                        <button id="exportBtn">📤 Export</button>
+                        <button id="importBtn">📥 Import</button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Prompts durchsuchen...">
+            <select id="categoryFilter">
+                <option value="">Alle Kategorien</option>
+            </select>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar" id="sidebar">
+                <h3>Kategorien</h3>
+                <div class="category-tree" id="categoryTree"></div>
+            </div>
+
+            <div class="content-area">
+                <div class="prompt-grid" id="promptGrid"></div>
+                <table class="prompt-table" id="promptTable">
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Kurzbeschreibung</th>
+                            <th>Kategorie</th>
+                            <th>Tags</th>
+                            <th>Erstellt</th>
+                            <th>Aktionen</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Prompt Dialog -->
+        <dialog id="promptDialog">
+            <div class="dialog-content">
+                <h2>Neuer Prompt</h2>
+                <form id="promptForm">
+                    <div class="form-group">
+                        <label for="promptTitle">Titel:</label>
+                        <input type="text" id="promptTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="promptCategory">Kategorie:</label>
+                        <select id="promptCategory" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shortDescription">Kurzbeschreibung:</label>
+                        <textarea id="shortDescription" maxlength="200"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullDescription">Ausführliche Beschreibung:</label>
+                        <textarea id="fullDescription" maxlength="700"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="promptContent">Prompt-Inhalt:</label>
+                        <textarea id="promptContent" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="promptTags">Tags:</label>
+                        <input type="text" id="promptTags">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancelPrompt">Abbrechen</button>
+                        <button type="submit">Speichern</button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <!-- Template Execution Dialog -->
+        <dialog id="templateDialog">
+            <div class="dialog-content">
+                <h2>Template ausführen</h2>
+                <div id="templateForm"></div>
+                <div class="template-preview">
+                    <h3>Vorschau:</h3>
+                    <pre id="templatePreview"></pre>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="copyTemplateResult()">📋 Inhalt kopieren</button>
+                    <button type="button" onclick="closeTemplateDialog()">Schließen</button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- Category Management Dialog -->
+        <dialog id="categoryDialog">
+            <div class="dialog-content">
+                <h2>Kategorienverwaltung</h2>
+                <div class="category-management" id="categoryManagement"></div>
+                <div class="form-actions">
+                    <button type="button" onclick="addNewCategory()">+ Neue Kategorie</button>
+                    <button type="button" onclick="saveCategoriesAndClose()">Speichern</button>
+                    <button type="button" onclick="closeCategoryDialog()">Abbrechen</button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- Modal Overlay -->
+        <div id="modalOverlay" class="modal-overlay">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <div id="modalDescription"></div>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="category-manager.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
