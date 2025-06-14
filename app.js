@@ -489,3 +489,14 @@ function closeTemplateDialog() {
 window.addEventListener('DOMContentLoaded', () => {
     window.promptManager = new PromptManager();
 });
+
+// Global keydown handler to close dialogs and modal with ESC
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+        document.querySelectorAll('dialog[open]').forEach(d => d.close());
+        const overlay = document.getElementById('modalOverlay');
+        if (overlay && overlay.classList.contains('show')) {
+            overlay.classList.remove('show');
+        }
+    }
+});

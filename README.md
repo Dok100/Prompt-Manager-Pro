@@ -138,7 +138,7 @@ Analysiere den {{datentyp}} für {{unternehmen}}:
 ## 💡 Tipps & Tricks
 
 ### Effiziente Nutzung
-- **Keyboard-Shortcuts**: ESC schließt alle Dialoge
+- **Keyboard-Shortcuts**: ESC schließt geöffnete Dialoge und das Modal
 - **Bulk-Import**: Mehrere Prompts gleichzeitig importieren
 - **Backup-Routine**: Regelmäßig exportieren für Datensicherheit
 - **Tag-System**: Konsistente Tags für bessere Auffindbarkeit
