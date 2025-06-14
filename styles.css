@@ -198,6 +198,7 @@ button:hover {
   border-radius: 12px;
   box-shadow: var(--shadow);
   transition: all 0.2s ease;
+  border-top: 10px solid transparent;
   overflow: hidden;
 }
 
@@ -208,8 +209,8 @@ button:hover {
 
 .prompt-card-header {
   padding: 16px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: white;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .prompt-card-header h3 {
@@ -244,8 +245,8 @@ button:hover {
 }
 
 .tag {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  color: white;
+  background: #e0e0e0;
+  color: var(--text-primary);
   padding: 4px 10px;
   border-radius: 12px;
   font-size: 0.8em;
