@@ -3,11 +3,13 @@
 ## 🚀 Schnellstart
 
 ### Dateien herunterladen
-Alle 4 Dateien in einen Ordner speichern (z.B. `LLM-Prompt-Manager-Pro`):
+Alle 6 Dateien in einen Ordner speichern (z.B. `LLM-Prompt-Manager-Pro`):
 - `index.html` – Hauptanwendung
 - `styles.css` – Designvorlage
 - `app.js` – Anwendungslogik
 - `category-manager.js` – Kategorienverwaltung
+- `dashboard.html` – Übersicht der gespeicherten Daten
+- `dashboard.js` – Logik für das Dashboard
 
 ### Sofort starten
 ```bash
@@ -125,6 +127,11 @@ Analysiere den {{datentyp}} für {{unternehmen}}:
 - **Zebra-Striping**: Abwechselnde Zeilenfarben für bessere Lesbarkeit
 - **Inline-Aktionen**: Direkte Bearbeitung ohne Dialog
 - **Sortierbar**: Nach allen Spalten sortierbar
+
+### Dashboard
+- Übersichtliche Statistik zu allen gespeicherten Prompts
+- Zeigt die Anzahl der Prompts pro Kategorie
+- Über einen Button in der Kopfzeile erreichbar
 
 ## 💡 Tipps & Tricks
 
