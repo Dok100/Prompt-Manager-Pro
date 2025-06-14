@@ -4,6 +4,7 @@ class PromptManager {
         this.currentView = 'grid';
         this.editingPromptId = null;
 
+        this.applySavedTheme();
         this.initEventListeners();
         this.renderPrompts();
         categoryManager.updateCategorySelects();
@@ -64,6 +65,7 @@ class PromptManager {
         document.getElementById('categoriesBtn').addEventListener('click', () => this.showCategoryDialog());
         document.getElementById('toggleViewBtn').addEventListener('click', () => this.toggleView());
         document.getElementById('newPromptBtn').addEventListener('click', () => this.showPromptDialog());
+        document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
 
         // Import/Export
         document.getElementById('exportBtn').addEventListener('click', () => this.exportData());
@@ -327,6 +329,27 @@ class PromptManager {
         }
 
         this.renderPrompts();
+    }
+
+    toggleTheme() {
+        const isDark = document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        this.updateThemeToggleText();
+    }
+
+    applySavedTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+        this.updateThemeToggleText();
+    }
+
+    updateThemeToggleText() {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const isDark = document.body.classList.contains('dark-theme');
+        btn.textContent = isDark ? '☀️ Helles Theme' : '🌙 Dunkles Theme';
     }
 
     searchPrompts(term) {
