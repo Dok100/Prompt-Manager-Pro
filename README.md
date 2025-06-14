@@ -173,6 +173,8 @@ Analysiere den {{datentyp}} für {{unternehmen}}:
 - **Offline-Nutzung**: Funktioniert ohne Internetverbindung
 - **Native Erfahrung**: Wie eine echte macOS-Anwendung
 - **Auto-Updates**: Aktualisiert sich automatisch
+- **Service Worker**: Cacht alle wichtigen Dateien für den Offlinebetrieb
+- **Manifest**: Hinterlegt App-Name und Icons
 
 ## 🎉 Support & Updates
 
