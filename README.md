@@ -131,7 +131,8 @@ Analysiere den {{datentyp}} für {{unternehmen}}:
 
 ### Dashboard
 - Übersichtliche Statistik zu allen gespeicherten Prompts
-- Zeigt die Anzahl der Prompts pro Kategorie
+- Balkendiagramm mit Anzahl der Prompts pro Kategorie
+- Kreisdiagramm zeigt die Verteilung der Tags
 - Über einen Button in der Kopfzeile erreichbar
 
 ## 💡 Tipps & Tricks
