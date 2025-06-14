@@ -91,13 +91,17 @@ class CategoryManager {
 
     renderCategoryManagement() {
         const container = document.getElementById('categoryManagement');
-        container.innerHTML = this.categories.map(cat => `
-            <div class="category-edit-item">
-                <input type="text" value="${cat.name}" onchange="categoryManager.updateCategoryName('${cat.id}', this.value)">
-                <input type="color" value="${cat.color}" onchange="categoryManager.updateCategoryColor('${cat.id}', this.value)">
-                <button onclick="categoryManager.deleteCategory('${cat.id}')" class="btn-delete">🗑️</button>
-            </div>
-        `).join('');
+        container.innerHTML = this.categories.map(cat => {
+            const level = this.getCategoryPath(cat.id).split(' > ').length - 1;
+            return `
+                <div class="category-edit-item" style="margin-left:${level * 20}px">
+                    <input type="text" value="${cat.name}" onchange="categoryManager.updateCategoryName('${cat.id}', this.value)">
+                    <input type="color" value="${cat.color}" onchange="categoryManager.updateCategoryColor('${cat.id}', this.value)">
+                    <button onclick="addSubcategory('${cat.id}')" class="btn-add">➕</button>
+                    <button onclick="categoryManager.deleteCategory('${cat.id}')" class="btn-delete">🗑️</button>
+                </div>
+            `;
+        }).join('');
     }
 
     updateCategoryName(categoryId, newName) {
@@ -114,11 +118,45 @@ class CategoryManager {
         }
     }
 
+    addCategory(name, parentId = null) {
+        const newCategory = {
+            id: 'cat_' + Date.now(),
+            name: name,
+            parent: parentId,
+            children: [],
+            color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+        };
+        this.categories.push(newCategory);
+        if (parentId) {
+            const parent = this.categories.find(c => c.id === parentId);
+            if (parent) {
+                parent.children.push(newCategory.id);
+            }
+        }
+    }
+
     deleteCategory(categoryId) {
         if (confirm('Kategorie wirklich löschen?')) {
-            this.categories = this.categories.filter(c => c.id !== categoryId);
+            this._deleteCategoryRecursive(categoryId);
             this.renderCategoryManagement();
         }
+    }
+
+    _deleteCategoryRecursive(categoryId) {
+        const category = this.categories.find(c => c.id === categoryId);
+        if (!category) return;
+
+        const children = this.getChildren(categoryId);
+        children.forEach(child => this._deleteCategoryRecursive(child.id));
+
+        if (category.parent) {
+            const parent = this.categories.find(c => c.id === category.parent);
+            if (parent) {
+                parent.children = parent.children.filter(id => id !== categoryId);
+            }
+        }
+
+        this.categories = this.categories.filter(c => c.id !== categoryId);
     }
 
     getRootCategories() {
@@ -156,14 +194,15 @@ class CategoryManager {
 function addNewCategory() {
     const name = prompt('Name der neuen Kategorie:');
     if (name) {
-        const newCategory = {
-            id: 'cat_' + Date.now(),
-            name: name,
-            parent: null,
-            children: [],
-            color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-        };
-        categoryManager.categories.push(newCategory);
+        categoryManager.addCategory(name);
+        categoryManager.renderCategoryManagement();
+    }
+}
+
+function addSubcategory(parentId) {
+    const name = prompt('Name der Unterkategorie:');
+    if (name) {
+        categoryManager.addCategory(name, parentId);
         categoryManager.renderCategoryManagement();
     }
 }

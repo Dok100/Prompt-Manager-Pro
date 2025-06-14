@@ -277,6 +277,10 @@ button:hover {
   background: var(--danger-color);
 }
 
+.btn-add {
+  background: var(--secondary-color);
+}
+
 /* Table View */
 .prompt-table {
   width: 100%;

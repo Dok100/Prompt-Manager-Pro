@@ -47,8 +47,8 @@ open index.html
 4. **Speichern**: Änderungen werden automatisch gespeichert
 
 ### Unterkategorie hinzufügen
-1. **Kategorie auswählen**: In der Baumansicht auf gewünschte Hauptkategorie
-2. **Plus-Button**: Beim Hover über Kategorie erscheint "+" Button
+1. **Kategorienverwaltung öffnen**: Auf "📁 Kategorien" klicken
+2. **Plus-Button** neben der gewünschten Hauptkategorie wählen
 3. **Name eingeben**: Unterkategorie wird automatisch zugeordnet
 
 ### Kategorien bearbeiten
