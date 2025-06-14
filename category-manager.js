@@ -169,7 +169,22 @@ class CategoryManager {
 
     getPromptCount(categoryId) {
         if (!window.promptManager) return 0;
-        return window.promptManager.prompts.filter(p => p.category === categoryId).length;
+        const allCategories = [categoryId, ...this.getAllDescendantCategories(categoryId)];
+        return window.promptManager.prompts.filter(p => allCategories.includes(p.category)).length;
+    }
+
+    getAllDescendantCategories(categoryId) {
+        const descendants = [];
+        const category = this.categories.find(c => c.id === categoryId);
+
+        if (category && category.children) {
+            category.children.forEach(childId => {
+                descendants.push(childId);
+                descendants.push(...this.getAllDescendantCategories(childId));
+            });
+        }
+
+        return descendants;
     }
 
     getCategoryPath(categoryId) {
