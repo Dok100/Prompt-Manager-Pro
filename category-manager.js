@@ -1,6 +1,7 @@
 class CategoryManager {
     constructor() {
         this.categories = this.loadCategories();
+        this.openCategories = this.loadOpenCategories();
     }
 
     loadCategories() {
@@ -16,10 +17,22 @@ class CategoryManager {
         return JSON.parse(localStorage.getItem('categories')) || defaultCategories;
     }
 
+    loadOpenCategories() {
+        const saved = JSON.parse(localStorage.getItem('openCategories'));
+        if (Array.isArray(saved)) {
+            return saved;
+        }
+        return this.getRootCategories().map(cat => cat.id);
+    }
+
     saveCategories() {
         localStorage.setItem('categories', JSON.stringify(this.categories));
         this.updateCategorySelects();
         this.renderCategoryTree();
+    }
+
+    saveOpenCategories() {
+        localStorage.setItem('openCategories', JSON.stringify(this.openCategories));
     }
 
     updateCategorySelects() {
@@ -46,15 +59,32 @@ class CategoryManager {
         this.attachTreeEventListeners();
     }
 
+    toggleCategory(categoryId) {
+        if (this.openCategories.includes(categoryId)) {
+            this.openCategories = this.openCategories.filter(id => id !== categoryId);
+        } else {
+            this.openCategories.push(categoryId);
+        }
+        this.saveOpenCategories();
+        this.renderCategoryTree();
+    }
+
     buildTreeHTML(categories, level = 0) {
         return categories.map(cat => {
             const children = this.getChildren(cat.id);
             const promptCount = this.getPromptCount(cat.id);
+            const isOpen = this.openCategories.includes(cat.id);
+            const toggleBtn = children.length > 0
+                ? `<button class="toggle-btn ${isOpen ? 'open' : ''}" data-toggle-id="${cat.id}">${isOpen ? '▼' : '►'}</button>`
+                : '';
+            const subcats = children.length > 0
+                ? `<div class="subcategories ${isOpen ? 'open' : 'collapsed'}">${this.buildTreeHTML(children, level + 1)}</div>`
+                : '';
 
             return `
                 <div class="category-item category-level-${level}" data-category-id="${cat.id}">
-                    <span class="category-name" style="color: ${cat.color}">${cat.name} (${promptCount})</span>
-                    ${children.length > 0 ? `<div class="subcategories">${this.buildTreeHTML(children, level + 1)}</div>` : ''}
+                    <div class="category-header">${toggleBtn}<span class="category-name" style="color: ${cat.color}">${cat.name} (${promptCount})</span></div>
+                    ${subcats}
                 </div>
             `;
         }).join('');
@@ -69,6 +99,14 @@ class CategoryManager {
                 if (window.promptManager) {
                     window.promptManager.filterByCategory(categoryId);
                 }
+            });
+        });
+
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.dataset.toggleId;
+                this.toggleCategory(id);
             });
         });
     }
@@ -133,12 +171,15 @@ class CategoryManager {
                 parent.children.push(newCategory.id);
             }
         }
+        this.openCategories.push(newCategory.id);
+        this.saveOpenCategories();
     }
 
     deleteCategory(categoryId) {
         if (confirm('Kategorie wirklich löschen?')) {
             this._deleteCategoryRecursive(categoryId);
             this.renderCategoryManagement();
+            this.saveOpenCategories();
         }
     }
 
@@ -157,6 +198,7 @@ class CategoryManager {
         }
 
         this.categories = this.categories.filter(c => c.id !== categoryId);
+        this.openCategories = this.openCategories.filter(id => id !== categoryId);
     }
 
     getRootCategories() {

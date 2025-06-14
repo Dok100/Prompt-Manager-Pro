@@ -160,9 +160,35 @@ button:hover {
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease;
+}
+
+.category-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 6px;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.toggle-btn.open {
+  transform: rotate(90deg);
+}
+
+.subcategories {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.subcategories.open {
+  max-height: 1000px;
 }
 
 .category-item:hover {
