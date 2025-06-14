@@ -203,6 +203,11 @@ class CategoryManager {
 
         return path.join(' > ');
     }
+
+    getCategoryColor(categoryId) {
+        const category = this.categories.find(c => c.id === categoryId);
+        return category ? category.color : '#ccc';
+    }
 }
 
 // Global functions

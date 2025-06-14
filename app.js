@@ -241,10 +241,11 @@ class PromptManager {
 
     createPromptCard(prompt) {
         const categoryPath = categoryManager.getCategoryPath(prompt.category);
+        const categoryColor = categoryManager.getCategoryColor(prompt.category);
         const createdDate = new Date(prompt.created).toLocaleDateString('de-DE');
 
         return `
-            <div class="prompt-card">
+            <div class="prompt-card" style="border-top-color: ${categoryColor};">
                 <div class="prompt-card-header">
                     <h3 ondblclick="promptManager.showFullDescription(${prompt.id})">${prompt.title}</h3>
                 </div>
