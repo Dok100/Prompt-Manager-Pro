@@ -4,22 +4,19 @@
 
 ### Dateien herunterladen
 Alle 4 Dateien in einen Ordner speichern (z.B. `LLM-Prompt-Manager-Pro`):
-- `index-improved.html` - Hauptanwendung
-- `styles-improved.css` - Verbessertes Design
-- `app-improved.js` - Anwendungslogik
-- `category-manager-improved.js` - Kategorienverwaltung
-- `start-app.sh` - Automatischer Starter
+- `index.html` – Hauptanwendung
+- `styles.css` – Designvorlage
+- `app.js` – Anwendungslogik
+- `category-manager.js` – Kategorienverwaltung
 
 ### Sofort starten
 ```bash
 # Terminal öffnen und zum Ordner navigieren
 cd ~/Desktop/LLM-Prompt-Manager-Pro
 
-# Startskript ausführbar machen
-chmod +x start-app.sh
-
-# App starten
-./start-app.sh
+# index.html im Browser öffnen
+# (oder einen lokalen HTTP-Server nutzen)
+open index.html
 ```
 
 ## ✨ Neue Verbesserungen in Version 3.0
