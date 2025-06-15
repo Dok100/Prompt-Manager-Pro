@@ -504,6 +504,11 @@ dialog::backdrop {
   position: relative;
 }
 
+.modal-overlay .modal-content pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .close-modal {
   position: absolute;
   top: 15px;
