@@ -1,4 +1,4 @@
-# LLM Prompt Manager Pro - Installation & Nutzung
+#  Prompt Manager Pro - Installation & Nutzung
 
 ## 🚀 Schnellstart
 
