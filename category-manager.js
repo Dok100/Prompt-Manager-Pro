@@ -38,16 +38,26 @@ class CategoryManager {
     updateCategorySelects() {
         const selects = document.querySelectorAll('#promptCategory, #categoryFilter');
 
-        selects.forEach(select => {
-            const currentValue = select.value;
-            select.innerHTML = select.id === 'categoryFilter' ? '<option value="">Alle Kategorien</option>' : '<option value="">Kategorie wählen</option>';
-
-            this.categories.forEach(cat => {
+        const buildOptions = (select, categories, level = 0) => {
+            categories.forEach(cat => {
                 const option = document.createElement('option');
                 option.value = cat.id;
-                option.textContent = this.getCategoryPath(cat.id);
+                option.textContent = `${'\u2013 '.repeat(level)}${cat.name}`; // tree structure
                 select.appendChild(option);
+                const children = this.getChildren(cat.id);
+                if (children.length) {
+                    buildOptions(select, children, level + 1);
+                }
             });
+        };
+
+        selects.forEach(select => {
+            const currentValue = select.value;
+            select.innerHTML = select.id === 'categoryFilter'
+                ? '<option value="">Alle Kategorien</option>'
+                : '<option value="">Kategorie wählen</option>';
+
+            buildOptions(select, this.getRootCategories());
 
             select.value = currentValue;
         });
