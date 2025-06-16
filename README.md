@@ -38,7 +38,7 @@ open index.html
 ### 🔧 Funktionale Verbesserungen
 - **Bessere Performance**: Optimierte Rendering-Performance
 - **Stabilere Kategorien**: Robuste Kategorie-Filter-Funktionalität
-- **Import/Export**: Verbesserte Datenportabilität
+- **Import/Export**: Verbesserte Datenportabilität inklusive Markdown-Export
 - **Responsive Design**: Optimiert für verschiedene Bildschirmgrößen
 
 ## 🛠️ Kategorien verwalten
@@ -101,8 +101,8 @@ Analysiere den {{datentyp}} für {{unternehmen}}:
 
 ### Daten exportieren
 1. **Menü-Button** (⚙️) klicken
-2. **"📤 Export"** wählen
-3. **JSON-Datei** wird heruntergeladen mit:
+2. **"📤 Export"** wählen für eine JSON-Datei oder **"📄 Markdown"** für eine Markdown-Datei
+3. **Datei** wird heruntergeladen mit:
    - Alle Prompts
    - Alle Kategorien
    - Metadaten (Exportdatum, Version)
@@ -165,7 +165,7 @@ Analysiere den {{datentyp}} für {{unternehmen}}:
 ### Datenspeicherung
 - **LocalStorage**: Alle Daten bleiben auf deinem Computer
 - **Keine Cloud**: Kein Datentransfer an externe Server
-- **JSON-Format**: Standard-Format für Import/Export
+- **JSON-Format**: Standard-Format für Import/Export (optional Markdown)
 - **Versionierung**: Kompatibilität mit zukünftigen Updates
 
 ### Progressive Web App (PWA)
