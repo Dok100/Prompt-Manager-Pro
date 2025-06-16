@@ -69,6 +69,7 @@ class PromptManager {
 
         // Import/Export
         document.getElementById('exportBtn').addEventListener('click', () => this.exportData());
+        document.getElementById('exportMdBtn').addEventListener('click', () => this.exportMarkdown());
         document.getElementById('importBtn').addEventListener('click', () => document.getElementById('importFile').click());
         document.getElementById('importFile').addEventListener('change', (e) => this.importData(e));
 
@@ -418,6 +419,42 @@ class PromptManager {
         URL.revokeObjectURL(url);
 
         this.showToast('Daten exportiert!');
+    }
+
+    exportMarkdown() {
+        const lines = [];
+        lines.push('# Prompt Manager Export');
+        lines.push(`Exportdatum: ${new Date().toLocaleDateString('de-DE')}`);
+        lines.push('');
+
+        this.prompts.forEach(prompt => {
+            const categoryPath = categoryManager.getCategoryPath(prompt.category);
+            lines.push(`## ${prompt.title}`);
+            if (prompt.shortDescription) {
+                lines.push(prompt.shortDescription);
+                lines.push('');
+            }
+            lines.push(`- **Kategorie:** ${categoryPath}`);
+            lines.push(`- **Erstellt:** ${new Date(prompt.created).toLocaleDateString('de-DE')}`);
+            if (prompt.tags && prompt.tags.length) {
+                lines.push(`- **Tags:** ${prompt.tags.join(', ')}`);
+            }
+            lines.push('');
+            lines.push('```');
+            lines.push(prompt.content);
+            lines.push('```');
+            lines.push('');
+        });
+
+        const blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `prompt-manager-export-${new Date().toISOString().split('T')[0]}.md`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        this.showToast('Markdown exportiert!');
     }
 
     importData(event) {
