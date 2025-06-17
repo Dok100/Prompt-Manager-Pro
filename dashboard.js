@@ -19,15 +19,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.getElementById('categoryOverview').innerHTML = `
+        <h2>Kategorien</h2>
+        <ul>${Object.keys(categoryCounts).map(name => `<li>${name}: ${categoryCounts[name]}</li>`).join('')}</ul>
+    `;
+
+    const topPrompts = prompts
+        .sort((a, b) => (b.usageCount || 0) - (a.usageCount || 0))
+        .slice(0, 5);
+    document.getElementById('topPrompts').innerHTML = `
+        <h2>Meistgenutzte Prompts</h2>
+        <ul>${topPrompts.map(p => `<li>${p.title} (${p.usageCount || 0}×)</li>`).join('')}</ul>
+    `;
+
+    const favoritePrompts = prompts.filter(p => p.favorite).slice(0, 10);
+    document.getElementById('favoritePrompts').innerHTML = `
+        <h2>Favoriten</h2>
+        <ul>${favoritePrompts.map(p => `<li>${p.title}</li>`).join('')}</ul>
+    `;
+
     const metrics = document.getElementById('metrics');
     const total = prompts.length;
-    let html = `<p><strong>Gesamtanzahl Prompts:</strong> ${total}</p>`;
-    html += '<ul>';
-    Object.keys(categoryCounts).forEach(name => {
-        html += `<li>${name}: ${categoryCounts[name]}</li>`;
-    });
-    html += '</ul>';
-    metrics.innerHTML = html;
+    metrics.innerHTML = `<p><strong>Gesamtanzahl Prompts:</strong> ${total}</p>`;
 
     // Chart: Prompts per category
     const categoryCtx = document.getElementById('categoryChart').getContext('2d');

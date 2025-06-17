@@ -1,6 +1,10 @@
 class PromptManager {
     constructor() {
         this.prompts = JSON.parse(localStorage.getItem('prompts')) || this.getDefaultPrompts();
+        this.prompts.forEach(p => {
+            if (p.favorite === undefined) p.favorite = false;
+            if (p.usageCount === undefined) p.usageCount = 0;
+        });
         this.currentView = 'grid';
         this.editingPromptId = null;
 
@@ -22,7 +26,9 @@ class PromptManager {
                 category: "coding",
                 tags: ["code-review", "quality", "best-practices"],
                 created: new Date().toISOString(),
-                updated: new Date().toISOString()
+                updated: new Date().toISOString(),
+                favorite: false,
+                usageCount: 0
             },
             {
                 id: 2,
@@ -33,7 +39,9 @@ class PromptManager {
                 category: "content",
                 tags: ["blog", "seo", "content-marketing"],
                 created: new Date().toISOString(),
-                updated: new Date().toISOString()
+                updated: new Date().toISOString(),
+                favorite: false,
+                usageCount: 0
             },
             {
                 id: 3,
@@ -44,7 +52,9 @@ class PromptManager {
                 category: "analysis",
                 tags: ["data", "statistics", "insights"],
                 created: new Date().toISOString(),
-                updated: new Date().toISOString()
+                updated: new Date().toISOString(),
+                favorite: false,
+                usageCount: 0
             },
             {
                 id: 4,
@@ -55,7 +65,9 @@ class PromptManager {
                 category: "support",
                 tags: ["email", "communication", "professional"],
                 created: new Date().toISOString(),
-                updated: new Date().toISOString()
+                updated: new Date().toISOString(),
+                favorite: false,
+                usageCount: 0
             }
         ];
     }
@@ -145,7 +157,9 @@ class PromptManager {
             ...data,
             id: Date.now(),
             created: new Date().toISOString(),
-            updated: new Date().toISOString()
+            updated: new Date().toISOString(),
+            favorite: false,
+            usageCount: 0
         };
 
         this.prompts.push(newPrompt);
@@ -177,9 +191,21 @@ class PromptManager {
         }
     }
 
+    toggleFavorite(id) {
+        const prompt = this.prompts.find(p => p.id === id);
+        if (prompt) {
+            prompt.favorite = !prompt.favorite;
+            this.savePrompts();
+            this.renderPrompts();
+        }
+    }
+
     executeTemplate(id) {
         const prompt = this.prompts.find(p => p.id === id);
         if (!prompt) return;
+
+        prompt.usageCount = (prompt.usageCount || 0) + 1;
+        this.savePrompts();
 
         const variables = this.extractTemplateVariables(prompt.content);
         if (variables.length === 0) {
@@ -251,6 +277,7 @@ class PromptManager {
             <div class="prompt-card" style="border-top-color: ${categoryColor};">
                 <div class="prompt-card-header">
                     <h3 ondblclick="promptManager.showFullDescription(${prompt.id})">${prompt.title}</h3>
+                    <button class="favorite-btn ${prompt.favorite ? '' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">${prompt.favorite ? '⭐' : '☆'}</button>
                 </div>
                 <div class="prompt-card-body">
                     <div class="prompt-meta">
@@ -277,7 +304,7 @@ class PromptManager {
 
         return `
             <tr>
-                <td><strong>${prompt.title}</strong></td>
+                <td><button class="favorite-btn ${prompt.favorite ? '' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">${prompt.favorite ? '⭐' : '☆'}</button> <strong>${prompt.title}</strong></td>
                 <td>${prompt.shortDescription || 'Keine Kurzbeschreibung'}</td>
                 <td>${categoryPath}</td>
                 <td>${prompt.tags.join(', ')}</td>
@@ -481,6 +508,11 @@ class PromptManager {
                             this.prompts.push(prompt);
                         });
                     }
+
+                    this.prompts.forEach(p => {
+                        if (p.favorite === undefined) p.favorite = false;
+                        if (p.usageCount === undefined) p.usageCount = 0;
+                    });
 
                     this.savePrompts();
                     categoryManager.saveCategories();
