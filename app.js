@@ -6,6 +6,7 @@ class PromptManager {
             if (p.usageCount === undefined) p.usageCount = 0;
         });
         this.currentView = 'grid';
+        this.showFavoritesOnly = false;
         this.editingPromptId = null;
 
         this.applySavedTheme();
@@ -77,6 +78,7 @@ class PromptManager {
         document.getElementById('categoriesBtn').addEventListener('click', () => this.showCategoryDialog());
         document.getElementById('toggleViewBtn').addEventListener('click', () => this.toggleView());
         document.getElementById('newPromptBtn').addEventListener('click', () => this.showPromptDialog());
+        document.getElementById('favoritesBtn').addEventListener('click', () => this.toggleFavoritesFilter());
         document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
 
         // Import/Export
@@ -343,6 +345,18 @@ class PromptManager {
 
     showCategoryDialog() {
         categoryManager.showCategoryDialog();
+    }
+
+    toggleFavoritesFilter() {
+        const btn = document.getElementById('favoritesBtn');
+        this.showFavoritesOnly = !this.showFavoritesOnly;
+        if (this.showFavoritesOnly) {
+            btn.textContent = '★ Alle';
+            this.displayPrompts(this.prompts.filter(p => p.favorite));
+        } else {
+            btn.textContent = '☆ Favoriten';
+            this.displayPrompts(this.prompts);
+        }
     }
 
     toggleView() {

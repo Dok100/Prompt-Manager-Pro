@@ -87,6 +87,10 @@ button {
   box-shadow: var(--shadow);
 }
 
+button:focus {
+  outline: none;
+}
+
 button:hover {
   box-shadow: var(--shadow-lg);
 }
@@ -139,6 +143,7 @@ button:hover {
   border: 2px solid var(--border-color);
   border-radius: 8px;
   background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 /* Main Layout */
@@ -296,6 +301,11 @@ button:hover {
   font-weight: 500;
 }
 
+body.dark-theme .tag {
+  background: #444;
+  color: var(--text-primary);
+}
+
 .prompt-actions {
   display: flex;
   gap: 8px;
@@ -448,6 +458,8 @@ dialog::backdrop {
   border-radius: 8px;
   font-size: 14px;
   box-shadow: none;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .form-group textarea {
@@ -594,4 +606,17 @@ dialog::backdrop {
   .prompt-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 600px) {
+  #categoriesBtn {
+    display: none;
+  }
+  #categoriesMenuItem {
+    display: block;
+  }
+}
+
+#categoriesMenuItem {
+  display: none;
 }
