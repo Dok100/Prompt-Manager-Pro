@@ -277,7 +277,7 @@ class PromptManager {
             <div class="prompt-card" style="border-top-color: ${categoryColor};">
                 <div class="prompt-card-header">
                     <h3 ondblclick="promptManager.showFullDescription(${prompt.id})">${prompt.title}</h3>
-                    <button class="favorite-btn ${prompt.favorite ? '' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">${prompt.favorite ? '⭐' : '☆'}</button>
+                    <button class="favorite-btn ${prompt.favorite ? 'active' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">☆</button>
                 </div>
                 <div class="prompt-card-body">
                     <div class="prompt-meta">
@@ -304,7 +304,7 @@ class PromptManager {
 
         return `
             <tr>
-                <td><button class="favorite-btn ${prompt.favorite ? '' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">${prompt.favorite ? '⭐' : '☆'}</button> <strong>${prompt.title}</strong></td>
+                <td><button class="favorite-btn ${prompt.favorite ? 'active' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">☆</button> <strong>${prompt.title}</strong></td>
                 <td>${prompt.shortDescription || 'Keine Kurzbeschreibung'}</td>
                 <td>${categoryPath}</td>
                 <td>${prompt.tags.join(', ')}</td>
