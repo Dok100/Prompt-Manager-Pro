@@ -18,6 +18,7 @@
                 <button id="categoriesBtn">📁 Kategorien</button>
                 <button id="toggleViewBtn">📊 Tabellenansicht</button>
                 <button id="dashboardBtn" onclick="window.location.href='dashboard.html'">📈 Dashboard</button>
+                <button id="favoritesBtn">☆ Favoriten</button>
                 <button id="themeToggle">🌙 Dunkles Theme</button>
                 <div class="dropdown">
                     <button id="menuBtn">⚙️ Menü</button>
@@ -26,6 +27,7 @@
                         <button id="exportBtn">📤 Export</button>
                         <button id="exportMdBtn">📄 Markdown</button>
                         <button id="importBtn">📥 Import</button>
+                        <button id="categoriesMenuItem" onclick="promptManager.showCategoryDialog()">📁 Kategorien</button>
                         <input type="file" id="importFile" accept=".json" style="display: none;">
                     </div>
                 </div>
