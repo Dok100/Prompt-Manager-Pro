@@ -257,6 +257,12 @@ class PromptManager {
         table.style.display = 'none';
 
         grid.innerHTML = this.prompts.map(prompt => this.createPromptCard(prompt)).join('');
+        grid.querySelectorAll('.prompt-card').forEach(card => {
+            card.addEventListener('click', () => {
+                grid.querySelectorAll('.prompt-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+        });
     }
 
     renderTable() {
@@ -283,8 +289,7 @@ class PromptManager {
                 </div>
                 <div class="prompt-card-body">
                     <div class="prompt-meta">
-                        <span>📁 ${categoryPath}</span>
-                        <span>📅 ${createdDate}</span>
+                        ${this.categoryIcon(prompt.category)} ${categoryPath} - ${createdDate}
                     </div>
                     <div class="prompt-description">${prompt.shortDescription || 'Keine Kurzbeschreibung'}</div>
                     <div class="prompt-tags">
@@ -318,6 +323,11 @@ class PromptManager {
                 </td>
             </tr>
         `;
+    }
+
+    categoryIcon(categoryId) {
+        const cat = categoryManager.categories.find(c => c.id === categoryId);
+        return cat && !cat.parent ? '📁' : '';
     }
 
     showFullDescription(promptId) {

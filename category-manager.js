@@ -92,8 +92,8 @@ class CategoryManager {
                 : '';
 
             return `
-                <div class="category-item category-level-${level}" data-category-id="${cat.id}">
-                    <div class="category-header">${toggleBtn}<span class="category-name" style="color: ${cat.color}">${cat.name} (${promptCount})</span></div>
+                <div class="category-item category-level-${level}" data-category-id="${cat.id}" style="--cat-color: ${cat.color}">
+                    <div class="category-header">${toggleBtn}<span class="category-name">${cat.name} (${promptCount})</span></div>
                     ${subcats}
                 </div>
             `;
