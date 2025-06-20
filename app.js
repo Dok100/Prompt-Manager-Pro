@@ -241,6 +241,16 @@ class PromptManager {
         dialog.showModal();
     }
 
+    formatDescription(text) {
+        if (!text) return '';
+        const keywords = ['Zweck:', 'Anwendung:', 'Input:', 'Output:', 'Tipps:'];
+        keywords.forEach(word => {
+            const regex = new RegExp(word, 'gi');
+            text = text.replace(regex, `<strong>${word}</strong>`);
+        });
+        return text;
+    }
+
     renderPrompts() {
         if (this.currentView === 'grid') {
             this.renderGrid();
@@ -337,7 +347,7 @@ class PromptManager {
         document.getElementById('modalTitle').textContent = prompt.title;
         document.getElementById('modalDescription').innerHTML = `
             <p><strong>Kurzbeschreibung:</strong> ${prompt.shortDescription || 'Keine'}</p>
-            <p><strong>Beschreibung:</strong> ${prompt.fullDescription || 'Keine'}</p>
+            <p><strong>Beschreibung:</strong> ${this.formatDescription(prompt.fullDescription || 'Keine')}</p>
             <p><strong>Kategorie:</strong> ${categoryManager.getCategoryPath(prompt.category)}</p>
             <p><strong>Tags:</strong> ${prompt.tags.join(', ') || 'Keine'}</p>
         `;
