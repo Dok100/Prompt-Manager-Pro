@@ -100,6 +100,47 @@
                         <input type="text" id="promptTags">
                     </div>
 
+                    <div class="form-group form-toggle">
+                        <div class="toggle-label">
+                            <h3>Custom GPT Einstellungen</h3>
+                            <p>Aktiviere zusätzliche Konfigurationsbereiche für Custom GPT Profile.</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="customGptToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="custom-gpt-sections" id="customGptSections">
+                        <fieldset class="custom-gpt-section" data-section="profile">
+                            <legend>Profil</legend>
+                            <p class="section-hint">Definiere Rollenverständnis, Tonalität und Kernkompetenzen.</p>
+                            <div class="custom-gpt-list" data-section="profile"></div>
+                            <button type="button" class="btn-add-entry" data-section="profile">+ Profil-Eintrag</button>
+                        </fieldset>
+
+                        <fieldset class="custom-gpt-section" data-section="conversation">
+                            <legend>Konversation</legend>
+                            <p class="section-hint">Lege Gesprächsleitfäden, Beispielantworten oder Regeln fest.</p>
+                            <div class="custom-gpt-list" data-section="conversation"></div>
+                            <button type="button" class="btn-add-entry" data-section="conversation">+ Konversations-Eintrag</button>
+                        </fieldset>
+
+                        <fieldset class="custom-gpt-section" data-section="knowledge">
+                            <legend>Wissen</legend>
+                            <p class="section-hint">Verweise auf Wissensquellen, Dateien oder thematische Grenzen.</p>
+                            <div class="custom-gpt-list" data-section="knowledge"></div>
+                            <button type="button" class="btn-add-entry" data-section="knowledge">+ Wissens-Eintrag</button>
+                        </fieldset>
+
+                        <fieldset class="custom-gpt-section" data-section="actions">
+                            <legend>Aktionen</legend>
+                            <p class="section-hint">Beschreibe Tools, APIs oder Workflows, die verfügbar sind.</p>
+                            <div class="custom-gpt-list" data-section="actions"></div>
+                            <button type="button" class="btn-add-entry" data-section="actions">+ Aktions-Eintrag</button>
+                        </fieldset>
+                    </div>
+
                     <div class="form-actions">
                         <button type="button" id="cancelPrompt">Abbrechen</button>
                         <button type="submit">Speichern</button>
