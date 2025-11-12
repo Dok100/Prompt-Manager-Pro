@@ -1,10 +1,33 @@
 class PromptManager {
     constructor() {
-        this.prompts = JSON.parse(localStorage.getItem('prompts')) || this.getDefaultPrompts();
-        this.prompts.forEach(p => {
-            if (p.favorite === undefined) p.favorite = false;
-            if (p.usageCount === undefined) p.usageCount = 0;
+        this.customGptDefaults = Object.freeze({
+            profile: [],
+            conversation: [],
+            knowledge: [],
+            actions: []
         });
+
+        const storedPrompts = JSON.parse(localStorage.getItem('prompts'));
+        const hasStoredPrompts = Array.isArray(storedPrompts);
+        const basePrompts = hasStoredPrompts ? storedPrompts : this.getDefaultPrompts();
+        this.prompts = basePrompts.map(prompt => this.normalizePrompt(prompt));
+
+        if (hasStoredPrompts) {
+            const needsMigration = storedPrompts.some(prompt => {
+                if (!prompt) return true;
+                return (
+                    prompt.type === undefined ||
+                    !Array.isArray(prompt.profile) ||
+                    !Array.isArray(prompt.conversation) ||
+                    !Array.isArray(prompt.knowledge) ||
+                    !Array.isArray(prompt.actions)
+                );
+            });
+
+            if (needsMigration) {
+                this.savePrompts();
+            }
+        }
         this.currentView = 'grid';
         this.showFavoritesOnly = false;
         this.editingPromptId = null;
@@ -19,7 +42,9 @@ class PromptManager {
     getDefaultPrompts() {
         return [
             {
+                ...this.getCustomGptDefaults(),
                 id: 1,
+                type: 'prompt',
                 title: "Code Review Assistant",
                 shortDescription: "Systematische Code-Reviews mit strukturierter Ausgabe",
                 fullDescription: "Dieser Prompt führt systematische Code-Reviews durch mit Fokus auf Best Practices, Sicherheit und Performance.",
@@ -32,7 +57,9 @@ class PromptManager {
                 usageCount: 0
             },
             {
+                ...this.getCustomGptDefaults(),
                 id: 2,
+                type: 'prompt',
                 title: "Blog Content Creator",
                 shortDescription: "Erstellt SEO-optimierte Blog-Artikel zu jedem Thema",
                 fullDescription: "Generiert vollständige Blog-Artikel mit SEO-Optimierung und strukturiertem Aufbau.",
@@ -45,7 +72,9 @@ class PromptManager {
                 usageCount: 0
             },
             {
+                ...this.getCustomGptDefaults(),
                 id: 3,
+                type: 'prompt',
                 title: "Data Analysis Expert",
                 shortDescription: "Analysiert Datensätze und erstellt Insights",
                 fullDescription: "Führt umfassende Datenanalysen durch und erstellt actionable Insights.",
@@ -58,7 +87,9 @@ class PromptManager {
                 usageCount: 0
             },
             {
+                ...this.getCustomGptDefaults(),
                 id: 4,
+                type: 'prompt',
                 title: "Professional Email Response",
                 shortDescription: "Erstellt höfliche und professionelle E-Mail-Antworten",
                 fullDescription: "Generiert professionelle E-Mail-Antworten für verschiedene Business-Kontexte.",
@@ -71,6 +102,33 @@ class PromptManager {
                 usageCount: 0
             }
         ];
+    }
+
+    getCustomGptDefaults() {
+        return {
+            profile: [...this.customGptDefaults.profile],
+            conversation: [...this.customGptDefaults.conversation],
+            knowledge: [...this.customGptDefaults.knowledge],
+            actions: [...this.customGptDefaults.actions]
+        };
+    }
+
+    normalizePrompt(prompt) {
+        const defaults = this.getCustomGptDefaults();
+        const normalized = {
+            ...defaults,
+            ...prompt
+        };
+
+        normalized.type = prompt.type || 'prompt';
+        normalized.profile = Array.isArray(normalized.profile) ? normalized.profile : [];
+        normalized.conversation = Array.isArray(normalized.conversation) ? normalized.conversation : [];
+        normalized.knowledge = Array.isArray(normalized.knowledge) ? normalized.knowledge : [];
+        normalized.actions = Array.isArray(normalized.actions) ? normalized.actions : [];
+        if (normalized.favorite === undefined) normalized.favorite = false;
+        if (normalized.usageCount === undefined) normalized.usageCount = 0;
+
+        return normalized;
     }
 
     initEventListeners() {
@@ -155,14 +213,13 @@ class PromptManager {
     }
 
     createPrompt(data) {
-        const newPrompt = {
+        const newPrompt = this.normalizePrompt({
+            ...this.getCustomGptDefaults(),
             ...data,
             id: Date.now(),
             created: new Date().toISOString(),
-            updated: new Date().toISOString(),
-            favorite: false,
-            usageCount: 0
-        };
+            updated: new Date().toISOString()
+        });
 
         this.prompts.push(newPrompt);
         this.savePrompts();
@@ -173,11 +230,11 @@ class PromptManager {
     updatePrompt(id, data) {
         const index = this.prompts.findIndex(p => p.id === id);
         if (index !== -1) {
-            this.prompts[index] = {
+            this.prompts[index] = this.normalizePrompt({
                 ...this.prompts[index],
                 ...data,
                 updated: new Date().toISOString()
-            };
+            });
             this.savePrompts();
             this.renderPrompts();
             this.showToast('Prompt aktualisiert!');
@@ -531,22 +588,20 @@ class PromptManager {
                     const replace = confirm('Möchten Sie die vorhandenen Daten ersetzen (OK) oder die importierten Daten hinzufügen (Abbrechen)?');
 
                     if (replace) {
-                        this.prompts = data.prompts;
+                        this.prompts = data.prompts.map(prompt => this.normalizePrompt(prompt));
                         if (data.categories) {
                             categoryManager.categories = data.categories;
                         }
                     } else {
                         const maxId = Math.max(...this.prompts.map(p => p.id), 0);
                         data.prompts.forEach((prompt, index) => {
-                            prompt.id = maxId + index + 1;
-                            this.prompts.push(prompt);
+                            const normalized = this.normalizePrompt({
+                                ...prompt,
+                                id: maxId + index + 1
+                            });
+                            this.prompts.push(normalized);
                         });
                     }
-
-                    this.prompts.forEach(p => {
-                        if (p.favorite === undefined) p.favorite = false;
-                        if (p.usageCount === undefined) p.usageCount = 0;
-                    });
 
                     this.savePrompts();
                     categoryManager.saveCategories();
