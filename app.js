@@ -7,6 +7,14 @@ class PromptManager {
             actions: []
         });
 
+        this.customGptSections = ['profile', 'conversation', 'knowledge', 'actions'];
+        this.customGptSectionLabels = {
+            profile: 'Profil',
+            conversation: 'Konversation',
+            knowledge: 'Wissen',
+            actions: 'Aktionen'
+        };
+
         const storedPrompts = JSON.parse(localStorage.getItem('prompts'));
         const hasStoredPrompts = Array.isArray(storedPrompts);
         const basePrompts = hasStoredPrompts ? storedPrompts : this.getDefaultPrompts();
@@ -34,6 +42,7 @@ class PromptManager {
 
         this.applySavedTheme();
         this.initEventListeners();
+        this.setupCustomGptFormControls();
         this.renderPrompts();
         categoryManager.updateCategorySelects();
         categoryManager.renderCategoryTree();
@@ -120,15 +129,42 @@ class PromptManager {
             ...prompt
         };
 
-        normalized.type = prompt.type || 'prompt';
-        normalized.profile = Array.isArray(normalized.profile) ? normalized.profile : [];
-        normalized.conversation = Array.isArray(normalized.conversation) ? normalized.conversation : [];
-        normalized.knowledge = Array.isArray(normalized.knowledge) ? normalized.knowledge : [];
-        normalized.actions = Array.isArray(normalized.actions) ? normalized.actions : [];
+        normalized.type = normalized.type === 'custom-gpt' ? 'custom-gpt' : 'prompt';
+        this.customGptSections.forEach(section => {
+            const entries = Array.isArray(normalized[section]) ? normalized[section] : [];
+            normalized[section] = entries
+                .map(entry => this.normalizeCustomGptEntry(entry))
+                .filter(Boolean);
+        });
+        normalized.tags = Array.isArray(normalized.tags) ? normalized.tags : [];
         if (normalized.favorite === undefined) normalized.favorite = false;
         if (normalized.usageCount === undefined) normalized.usageCount = 0;
 
         return normalized;
+    }
+
+    normalizeCustomGptEntry(entry) {
+        if (!entry) return null;
+
+        if (typeof entry === 'string') {
+            const content = entry.trim();
+            if (!content) return null;
+            return { title: '', content };
+        }
+
+        if (typeof entry === 'object') {
+            const title = (entry.title || entry.name || '').toString().trim();
+            const rawContent = entry.content ?? entry.description ?? entry.body ?? entry.text ?? '';
+            const content = rawContent.toString().trim();
+
+            if (!title && !content) {
+                return null;
+            }
+
+            return { title, content };
+        }
+
+        return null;
     }
 
     initEventListeners() {
@@ -162,18 +198,174 @@ class PromptManager {
         });
     }
 
+    setupCustomGptFormControls() {
+        const form = document.getElementById('promptForm');
+        const toggle = document.getElementById('customGptToggle');
+        if (!form || !toggle) return;
+
+        toggle.addEventListener('change', () => {
+            this.updateCustomGptVisibility();
+            if (toggle.checked) {
+                this.customGptSections.forEach(section => {
+                    const container = this.getCustomGptContainer(section);
+                    if (container && container.childElementCount === 0) {
+                        this.addCustomGptEntry(section);
+                    }
+                });
+            }
+        });
+
+        form.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target.classList.contains('btn-add-entry')) {
+                event.preventDefault();
+                const section = target.dataset.section;
+                this.addCustomGptEntry(section);
+            }
+        });
+
+        this.updateCustomGptVisibility();
+    }
+
+    updateCustomGptVisibility() {
+        const toggle = document.getElementById('customGptToggle');
+        const isVisible = toggle ? toggle.checked : false;
+        const sections = document.querySelectorAll('.custom-gpt-section');
+        sections.forEach(section => {
+            section.classList.toggle('visible', isVisible);
+        });
+        const container = document.getElementById('customGptSections');
+        if (container) {
+            container.style.display = isVisible ? 'grid' : 'none';
+        }
+    }
+
+    resetCustomGptSections() {
+        this.customGptSections.forEach(section => {
+            const container = this.getCustomGptContainer(section);
+            if (container) {
+                container.innerHTML = '';
+            }
+        });
+    }
+
+    getCustomGptContainer(section) {
+        return document.querySelector(`.custom-gpt-list[data-section="${section}"]`);
+    }
+
+    addCustomGptEntry(section, entry = {}) {
+        const container = this.getCustomGptContainer(section);
+        if (!container) return;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'custom-gpt-entry';
+
+        const header = document.createElement('div');
+        header.className = 'custom-gpt-entry-header';
+
+        const titleInput = document.createElement('input');
+        titleInput.type = 'text';
+        titleInput.className = 'custom-entry-title';
+        titleInput.placeholder = 'Titel (optional)';
+        titleInput.value = entry.title || '';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'btn-remove-entry';
+        removeBtn.textContent = 'Entfernen';
+        removeBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            wrapper.remove();
+        });
+
+        header.appendChild(titleInput);
+        header.appendChild(removeBtn);
+
+        const contentArea = document.createElement('textarea');
+        contentArea.className = 'custom-entry-content';
+        contentArea.placeholder = 'Details';
+        contentArea.value = entry.content || '';
+
+        wrapper.appendChild(header);
+        wrapper.appendChild(contentArea);
+
+        container.appendChild(wrapper);
+    }
+
+    collectCustomGptEntries(section) {
+        const container = this.getCustomGptContainer(section);
+        if (!container) return [];
+
+        return Array.from(container.querySelectorAll('.custom-gpt-entry')).map(entry => {
+            const title = entry.querySelector('.custom-entry-title')?.value.trim() || '';
+            const content = entry.querySelector('.custom-entry-content')?.value.trim() || '';
+            if (!title && !content) {
+                return null;
+            }
+            return { title, content };
+        }).filter(Boolean);
+    }
+
+    hasCustomGptData(prompt) {
+        if (!prompt) return false;
+        return this.customGptSections.some(section => Array.isArray(prompt[section]) && prompt[section].length > 0);
+    }
+
+    getPromptTypeLabel(prompt) {
+        return prompt?.type === 'custom-gpt' ? 'Custom GPT' : 'Standard-Prompt';
+    }
+
+    renderCustomGptSummary(prompt) {
+        if (!this.hasCustomGptData(prompt)) return '';
+
+        const badges = this.customGptSections
+            .filter(section => Array.isArray(prompt[section]) && prompt[section].length > 0)
+            .map(section => `<span class="badge badge-section">${this.customGptSectionLabels[section]}: ${prompt[section].length}</span>`)
+            .join('');
+
+        return badges ? `<div class="custom-gpt-summary">${badges}</div>` : '';
+    }
+
+    renderModalCustomGpt(prompt) {
+        if (!this.hasCustomGptData(prompt)) return '';
+
+        const sections = this.customGptSections
+            .filter(section => Array.isArray(prompt[section]) && prompt[section].length > 0)
+            .map(section => {
+                const entries = prompt[section].map((entry, index) => {
+                    const heading = entry.title ? this.escapeHtml(entry.title) : `${this.customGptSectionLabels[section]} ${index + 1}`;
+                    const body = entry.content ? this.escapeHtml(entry.content) : 'Keine Details';
+                    return `
+                        <div class="modal-custom-entry">
+                            <h5>${heading}</h5>
+                            <p>${body}</p>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="modal-custom-section">
+                        <h4>${this.customGptSectionLabels[section]} (${prompt[section].length})</h4>
+                        ${entries}
+                    </div>
+                `;
+            }).join('');
+
+        return sections ? `<div class="modal-custom-gpt">${sections}</div>` : '';
+    }
+
     showPromptDialog(promptId = null) {
         this.editingPromptId = promptId;
         const dialog = document.getElementById('promptDialog');
 
+        categoryManager.updateCategorySelects();
+        this.resetForm();
+
         if (promptId) {
             const prompt = this.prompts.find(p => p.id === promptId);
             this.fillForm(prompt);
-        } else {
-            document.getElementById('promptForm').reset();
         }
 
-        categoryManager.updateCategorySelects();
         dialog.showModal();
     }
 
@@ -182,13 +374,46 @@ class PromptManager {
         this.editingPromptId = null;
     }
 
+    resetForm() {
+        const form = document.getElementById('promptForm');
+        if (form) form.reset();
+        const toggle = document.getElementById('customGptToggle');
+        if (toggle) toggle.checked = false;
+        this.resetCustomGptSections();
+        this.updateCustomGptVisibility();
+    }
+
     fillForm(prompt) {
-        document.getElementById('promptTitle').value = prompt.title;
-        document.getElementById('promptCategory').value = prompt.category;
-        document.getElementById('shortDescription').value = prompt.shortDescription || '';
-        document.getElementById('fullDescription').value = prompt.fullDescription || '';
-        document.getElementById('promptContent').value = prompt.content;
-        document.getElementById('promptTags').value = prompt.tags.join(', ');
+        if (!prompt) return;
+
+        const titleInput = document.getElementById('promptTitle');
+        const categoryInput = document.getElementById('promptCategory');
+        const shortDesc = document.getElementById('shortDescription');
+        const fullDesc = document.getElementById('fullDescription');
+        const content = document.getElementById('promptContent');
+        const tags = document.getElementById('promptTags');
+        const toggle = document.getElementById('customGptToggle');
+
+        if (titleInput) titleInput.value = prompt.title || '';
+        if (categoryInput) categoryInput.value = prompt.category || '';
+        if (shortDesc) shortDesc.value = prompt.shortDescription || '';
+        if (fullDesc) fullDesc.value = prompt.fullDescription || '';
+        if (content) content.value = prompt.content || '';
+        if (tags) tags.value = (prompt.tags || []).join(', ');
+
+        const isCustomGpt = (prompt.type === 'custom-gpt') || this.hasCustomGptData(prompt);
+        if (toggle) toggle.checked = isCustomGpt;
+
+        this.resetCustomGptSections();
+        if (isCustomGpt) {
+            this.customGptSections.forEach(section => {
+                const entries = Array.isArray(prompt[section]) ? prompt[section] : [];
+                if (entries.length === 0) return;
+                entries.forEach(entry => this.addCustomGptEntry(section, entry));
+            });
+        }
+
+        this.updateCustomGptVisibility();
     }
 
     handleFormSubmit(e) {
@@ -202,6 +427,17 @@ class PromptManager {
             content: document.getElementById('promptContent').value,
             tags: document.getElementById('promptTags').value.split(',').map(t => t.trim()).filter(t => t)
         };
+
+        const customToggle = document.getElementById('customGptToggle');
+        const isCustomGpt = customToggle ? customToggle.checked : false;
+        const customData = {};
+
+        this.customGptSections.forEach(section => {
+            customData[section] = isCustomGpt ? this.collectCustomGptEntries(section) : [];
+        });
+
+        formData.type = isCustomGpt ? 'custom-gpt' : 'prompt';
+        Object.assign(formData, customData);
 
         if (this.editingPromptId) {
             this.updatePrompt(this.editingPromptId, formData);
@@ -298,6 +534,17 @@ class PromptManager {
         dialog.showModal();
     }
 
+    escapeHtml(value) {
+        if (value === undefined || value === null) return '';
+        return value
+            .toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     formatDescription(text) {
         if (!text) return '';
         const keywords = ['Zweck:', 'Anwendung:', 'Input:', 'Output:', 'Tipps:'];
@@ -347,11 +594,18 @@ class PromptManager {
         const categoryPath = categoryManager.getCategoryPath(prompt.category);
         const categoryColor = categoryManager.getCategoryColor(prompt.category);
         const createdDate = new Date(prompt.created).toLocaleDateString('de-DE');
+        const tags = Array.isArray(prompt.tags) ? prompt.tags : [];
+        const showCustomBadge = prompt.type === 'custom-gpt' || this.hasCustomGptData(prompt);
+        const customBadge = showCustomBadge ? '<span class="badge badge-custom">Custom GPT</span>' : '';
+        const customSummary = this.renderCustomGptSummary(prompt);
 
         return `
             <div class="prompt-card" style="border-top-color: ${categoryColor};">
                 <div class="prompt-card-header">
-                    <h3 ondblclick="promptManager.showFullDescription(${prompt.id})">${prompt.title}</h3>
+                    <div class="prompt-card-title">
+                        <h3 ondblclick="promptManager.showFullDescription(${prompt.id})">${prompt.title}</h3>
+                        ${customBadge}
+                    </div>
                     <button class="favorite-btn ${prompt.favorite ? 'active' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">☆</button>
                 </div>
                 <div class="prompt-card-body">
@@ -360,8 +614,9 @@ class PromptManager {
                     </div>
                     <div class="prompt-description">${prompt.shortDescription || 'Keine Kurzbeschreibung'}</div>
                     <div class="prompt-tags">
-                        ${prompt.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
+                    ${customSummary}
                     <div class="prompt-actions">
                         <button onclick="promptManager.executeTemplate(${prompt.id})" class="btn-execute">▶️</button>
                         <button onclick="promptManager.showPromptDialog(${prompt.id})" class="btn-edit">✏️</button>
@@ -375,13 +630,17 @@ class PromptManager {
     createPromptRow(prompt) {
         const categoryPath = categoryManager.getCategoryPath(prompt.category);
         const createdDate = new Date(prompt.created).toLocaleDateString('de-DE');
+        const tags = Array.isArray(prompt.tags) ? prompt.tags : [];
+        const showCustomBadge = prompt.type === 'custom-gpt' || this.hasCustomGptData(prompt);
+        const customBadge = showCustomBadge ? '<span class="badge badge-custom">Custom GPT</span>' : '';
+        const customSummary = this.renderCustomGptSummary(prompt);
 
         return `
             <tr>
-                <td><button class="favorite-btn ${prompt.favorite ? 'active' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">☆</button> <strong>${prompt.title}</strong></td>
+                <td><button class="favorite-btn ${prompt.favorite ? 'active' : 'inactive'}" onclick="promptManager.toggleFavorite(${prompt.id})">☆</button> <strong>${prompt.title}</strong> ${customBadge}</td>
                 <td>${prompt.shortDescription || 'Keine Kurzbeschreibung'}</td>
                 <td>${categoryPath}</td>
-                <td>${prompt.tags.join(', ')}</td>
+                <td>${tags.join(', ')}</td>
                 <td>${createdDate}</td>
                 <td>
                     <button onclick="promptManager.executeTemplate(${prompt.id})">▶️</button>
@@ -389,6 +648,7 @@ class PromptManager {
                     <button onclick="promptManager.deletePrompt(${prompt.id})">🗑️</button>
                 </td>
             </tr>
+            ${customSummary ? `<tr class="table-custom-summary"><td colspan="6">${customSummary}</td></tr>` : ''}
         `;
     }
 
@@ -402,16 +662,31 @@ class PromptManager {
         if (!prompt) return;
 
         document.getElementById('modalTitle').textContent = prompt.title;
+        const tags = Array.isArray(prompt.tags) ? prompt.tags : [];
+        const typeLabel = this.getPromptTypeLabel(prompt);
+        const customSummary = this.renderCustomGptSummary(prompt);
         document.getElementById('modalDescription').innerHTML = `
             <p><strong>Kurzbeschreibung:</strong> ${prompt.shortDescription || 'Keine'}</p>
             <p><strong>Beschreibung:</strong> ${this.formatDescription(prompt.fullDescription || 'Keine')}</p>
             <p><strong>Kategorie:</strong> ${categoryManager.getCategoryPath(prompt.category)}</p>
-            <p><strong>Tags:</strong> ${prompt.tags.join(', ') || 'Keine'}</p>
+            <p><strong>Typ:</strong> ${typeLabel}</p>
+            <p><strong>Tags:</strong> ${tags.join(', ') || 'Keine'}</p>
+            ${customSummary}
         `;
-        document.getElementById('modalContent').innerHTML = `
-            <h3>Prompt-Inhalt:</h3>
-            <pre>${prompt.content}</pre>
-        `;
+        const modalSections = [];
+        if (prompt.content) {
+            modalSections.push(`
+                <h3>Prompt-Inhalt:</h3>
+                <pre>${this.escapeHtml(prompt.content)}</pre>
+            `);
+        }
+
+        const customSections = this.renderModalCustomGpt(prompt);
+        if (customSections) {
+            modalSections.push(customSections);
+        }
+
+        document.getElementById('modalContent').innerHTML = modalSections.join('');
 
         document.getElementById('modalOverlay').classList.add('show');
     }
@@ -472,13 +747,25 @@ class PromptManager {
     }
 
     searchPrompts(term) {
-        const filtered = this.prompts.filter(prompt =>
-            prompt.title.toLowerCase().includes(term.toLowerCase()) ||
-            prompt.shortDescription.toLowerCase().includes(term.toLowerCase()) ||
-            prompt.fullDescription.toLowerCase().includes(term.toLowerCase()) ||
-            prompt.content.toLowerCase().includes(term.toLowerCase()) ||
-            prompt.tags.some(tag => tag.toLowerCase().includes(term.toLowerCase()))
-        );
+        const searchTerm = term.toLowerCase();
+        const filtered = this.prompts.filter(prompt => {
+            const tags = Array.isArray(prompt.tags) ? prompt.tags : [];
+            const baseMatch =
+                (prompt.title || '').toLowerCase().includes(searchTerm) ||
+                (prompt.shortDescription || '').toLowerCase().includes(searchTerm) ||
+                (prompt.fullDescription || '').toLowerCase().includes(searchTerm) ||
+                (prompt.content || '').toLowerCase().includes(searchTerm) ||
+                tags.some(tag => (tag || '').toLowerCase().includes(searchTerm));
+
+            const customMatch = this.customGptSections.some(section =>
+                (Array.isArray(prompt[section]) ? prompt[section] : []).some(entry =>
+                    (entry.title || '').toLowerCase().includes(searchTerm) ||
+                    (entry.content || '').toLowerCase().includes(searchTerm)
+                )
+            );
+
+            return baseMatch || customMatch;
+        });
 
         this.displayPrompts(filtered);
     }
